@@ -2,7 +2,9 @@
   <div class="outerLayout">
     <LineChart />
     <div class="vertL">
-      <div v-for="item in items" :key="item">{{item}}</div>
+      <div v-if="items">
+        <div v-for="item in items" :key="item">{{item}}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -10,17 +12,25 @@
  
 <script>
 import LineChart from "./LineChartTest.vue";
-import Item from "./Item.vue";
-import {getData} from "../getData.js"
+import itemList from "./Item.vue";
+import { getData } from "../getData.js"
+//import VirtualList from "vue-virtual-scroll-list";
 
 export default {
   name: "HelloWorld",
   data() {
     return {
-      item:Item,
-      items: getData(),
+      item: itemList,
+      items: [],
     }
   },
+  created() {
+    getData().then(response => {
+      console.log(response);
+      this.items = response;
+    })
+  },
+
   components: {
     LineChart,
   },
@@ -63,12 +73,14 @@ a {
   display: grid;
   grid-template-columns: 80% auto;
   overflow: auto;
-  border: 5px solid #41729F;;
+  border: 5px solid #41729F;
+  ;
   border-radius: 5px;
   padding: 0;
   margin: 5%;
   margin-top: 5px;
-  background-color: #41729F;; 
+  background-color: #41729F;
+  ;
 }
 
 .mainCol {
@@ -85,8 +97,8 @@ a {
 }
 
 @media only screen and (max-width:600px) {
-    .outerLayout {
-      display: inline-block;
-     }
+  .outerLayout {
+    display: inline-block;
+  }
 }
 </style>

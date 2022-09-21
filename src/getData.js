@@ -18,6 +18,7 @@ export async function getData() {
         data.push({
             ticker: datapoints["Ticker"][k],
             price: datapoints["Price"][k],
+            change: datapoints["Percent Change"][k],
         })
 
     }

@@ -3,9 +3,15 @@
     <LineChart />
     <div class="vertL">
       <div v-if="items">
-        <div class="listItem" v-for="item in items" :key="item">{{item.ticker}} : {{item.price}} 
-        <div> Chg%: {{item.change}}%</div>
-      </div>
+        <div class="listHead">
+          <div>Ticker </div>
+          <div>Price </div>
+          <div>Change%</div>
+        </div>
+        <div class="listItem" v-for="item in items" :key="item">{{item.ticker}}
+          <div id="price"> {{item.price}}</div>
+          <div class="change" v-bind:class="`style:${changeColor};`"> {{item.change}}</div>
+        </div>
       </div>
     </div>
   </div>
@@ -33,6 +39,29 @@ export default {
     })
   },
 
+  methods: {
+    changeColor() {
+      var element = document.getElementsByClassName('change');
+      var color = (element.innerHTML) > 0 ? "color: green" : "color: red";
+      console.log(color);
+      console.log("worked");
+      console.log(element);
+      console.log(element.length);
+      return color
+    },
+
+  },
+  mounted() {
+    document.onreadystatechange = () => {
+      if (document.readyState == "complete") {
+        this.changeColor();
+      }
+    }
+
+  },
+
+
+
   components: {
     LineChart,
   },
@@ -40,12 +69,12 @@ export default {
     msg: String,
   },
 
+
 };
 </script>
 
 
 <style scoped>
-
 .vertL {
   overflow-y: scroll;
   float: right;
@@ -67,24 +96,33 @@ export default {
   ;
 }
 
-.listItem{
+.listItem {
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
   border-bottom: solid 2px #41729F;
   padding: 1em;
-  display: flex;
-  flex-direction: column;
   cursor: pointer;
 
 }
 
 .listItem:hover {
-    background-color: #41729F;
-    color: #C3E0E5;
+  background-color: #41729F;
+  color: #C3E0E5;
 }
 
 .listItem:active {
-    color: #41729fd0;
-    background-color: #41729f4b;
-    transform: translateY(4px);
+  color: #41729fd0;
+  background-color: #41729f4b;
+  transform: translateY(4px);
+}
+
+.listHead {
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  border-bottom: solid 2px #41729F;
+  padding: 1em;
+  cursor: pointer;
+
 }
 
 

@@ -2,7 +2,7 @@
   <div class="outerLayout">
     <LineChart />
     <div class="vertL">
-      <div v-if="items">
+      <div v-if="items.length">
         <div class="listHead">
           <div>Ticker </div>
           <div>Price </div>
@@ -10,7 +10,7 @@
         </div>
         <div class="listItem" v-for="item in items" :key="item">{{item.ticker}}
           <div id="price"> {{item.price}}</div>
-          <div class="change" v-bind:class="`style:${changeColor};`"> {{item.change}}</div>
+          <div class="change" :style="{'color':item.changeColor}"> {{item.change}}</div>
         </div>
       </div>
     </div>
@@ -22,6 +22,9 @@
 import LineChart from "./LineChartTest.vue";
 import itemList from "./Item.vue";
 import { getData } from "../getData.js"
+//import { response } from "express";
+//import { init } from "events";
+//import { nextTick } from 'vue';
 //import VirtualList from "vue-virtual-scroll-list";
 
 export default {
@@ -30,37 +33,56 @@ export default {
     return {
       item: itemList,
       items: [],
+      colorList:[]
     }
   },
-  created() {
+
+  methods: {
+
+    changeColor() {
+      var element = document.querySelectorAll('.change');
+      const colorList = [];
+
+      for (let i = 0; i < element.length; i++) {
+        var color = (element[i].innerHTML) > 0 ? "color: green" : "color: red";
+        colorList.push(color)
+
+        console.log(color);
+        console.log("worked");
+        // console.log(element);
+        //console.log(element.length);
+        console.log(element[i].innerHTML);
+  
+
+      }
+      return this.colorList = colorList
+    },
+
+
+  },
+
+  async created() {
     getData().then(response => {
       console.log(response);
       this.items = response;
     })
-  },
-
-  methods: {
-    changeColor() {
-      var element = document.getElementsByClassName('change');
-      var color = (element.innerHTML) > 0 ? "color: green" : "color: red";
-      console.log(color);
-      console.log("worked");
-      console.log(element);
-      console.log(element.length);
-      return color
-    },
-
-  },
-  mounted() {
-    document.onreadystatechange = () => {
-      if (document.readyState == "complete") {
-        this.changeColor();
-      }
-    }
 
   },
 
+  updated() {
+    /*     document.onreadystatechange = () => {
+          if (document.readyState == "complete") {
+            this.changeColor();
+            console.log(document.readyState)
+          }
+        },
+    
+          document.addEventListener('DOMContentLoaded', function () { nextTick().then(() => { console.log(document.getElementsByClassName('change')) }) });
+        this.$nextTick().then(() => { console.log(document.querySelectorAll('.change')) }), */
 
+    this.changeColor()
+
+  },
 
   components: {
     LineChart,
@@ -81,6 +103,7 @@ export default {
   background: #5885AF;
   border-radius: 10px;
   border: solid 2px #41729F;
+  height: 888px;
 }
 
 .outerLayout {
@@ -124,6 +147,7 @@ export default {
   cursor: pointer;
 
 }
+
 
 
 @media only screen and (max-width:600px) {

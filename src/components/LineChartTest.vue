@@ -8,7 +8,7 @@
         </div>
         <div class="chartBox">
             <div>
-                <button class="buttons" @click="fetchData2()">fetch2</button>
+                <button class="buttons" @click="fetchData2(ticker)">fetch2</button>
             </div>
             <canvas id="myChart2"></canvas>
         </div>
@@ -22,8 +22,9 @@
 <script>
 import Chart from "chart.js/auto";
 import { useTickerStore } from "../stores/tickers.js"
+import { storeToRefs } from 'pinia'
+//import { ref } from "vue"
 
-const tickerStore = useTickerStore()
 
 let stockPrice = []; // reverse order in datapoints ?
 let stockDate = [];
@@ -38,16 +39,19 @@ myChart;
 let myChart2;
 myChart2;
 
+var tickerLabel = "";
+
+
 
 
 export default {
 
     name: "LineChart",
     data() {
-    return {
-      ticker: tickerStore.ticker
-    }
-  },
+        return {
+
+        }
+    },
     mounted() {
         this.updateStockPriceHistoryChart();
         this.updateStockPriceHistoryChart2();
@@ -78,6 +82,10 @@ export default {
             const datapoints = await response.json();
             console.log(Object.keys(datapoints));
             console.log(Object.values(datapoints));
+            console.log(ticker);
+            ticker = ticker.trim();
+            tickerLabel = ticker;
+            console.log("label= " + tickerLabel)
             console.log(datapoints[ticker])
             stockDate2 = Object.keys(datapoints[ticker]);
             stockDate2 = stockDate2.reverse();
@@ -87,12 +95,21 @@ export default {
             stockPrice2 = stockPrice2.reverse();
             myChart2.config.data.datasets[0].data = stockPrice2;
             myChart2.config.data.labels = stockDate2;
+            myChart2.config.data.datasets[0].label = tickerLabel;
             myChart2.update();
             return datapoints;
         },
 
     },
     setup() {
+
+        const tickerStore = useTickerStore();
+        const { ticker } = storeToRefs(tickerStore)
+        const { getTicker } = tickerStore
+
+
+
+
         let updateStockPriceHistoryChart = () => {
             const ctx = document.getElementById("myChart");
             const labels = stockDate;
@@ -138,7 +155,6 @@ export default {
         };
 
 
-
         let updateStockPriceHistoryChart2 = () => {
             const ctx = document.getElementById("myChart2");
             const labels = stockDate2;
@@ -159,7 +175,7 @@ export default {
                 labels: labels,
                 datasets: [
                     {
-                        label: "Stock Market Price",
+                        label: tickerLabel,
                         data: stockPrice2,
                         fill: false,
                         borderColor: "rgb(75,192,192",
@@ -185,6 +201,7 @@ export default {
         return {
             updateStockPriceHistoryChart,
             updateStockPriceHistoryChart2,
+            tickerStore, ticker, getTicker,
         };
     },
 };

@@ -8,7 +8,7 @@
           <div>Price </div>
           <div>Change%</div>
         </div>
-        <div class="listItem" v-for="item , index in items" :key="item" @click="tickerStore.getTicker(index)">{{item.ticker}}
+        <div class="listItem" v-for="item , index in items" :key="item" @click="getTicker(index)">{{item.ticker}}
           <div id="price"> {{item.price}}</div>
           <div class="change" :style="{'color':item.changeColor}"> {{item.change}}</div>
         </div>
@@ -23,7 +23,9 @@ import LineChart from "./LineChartTest.vue";
 import itemList from "./Item.vue";
 import { getData } from "../getData.js";
 import { useTickerStore } from "../stores/tickers.js"
-//import { storeToRefs } from 'pinia'
+//import { computed } from "@vue/reactivity";
+//import { ref } from "vue";
+import { storeToRefs } from 'pinia'
 //import {getTicker} from "../geTicker.js";
 //import { response } from "express";
 //import { init } from "events";
@@ -42,11 +44,18 @@ export default {
     }
   },
 
-  setup(){
-    const tickerStore = useTickerStore()
-    return {tickerStore}
+  setup() {
+    /*    const tickerStore =useTickerStore();
+       return{tickerStore} */
+
+    const tickerStore = useTickerStore();
+    const { ticker } = storeToRefs(tickerStore)
+    const { getTicker } = tickerStore
+    return { tickerStore, ticker, getTicker }
 
   },
+
+
 
   methods: {
 
@@ -69,15 +78,15 @@ export default {
       return this.colorList = colorList
     },
 
-/*     getTicker(index) {
-      var element = document.getElementsByClassName('listItem');
-      var ticker = element[index].firstChild.data;
-      console.log(ticker);
-      console.log(element)
-
-      return this.ticker = ticker
-    },
- */
+    /*     getTicker(index) {
+          var element = document.getElementsByClassName('listItem');
+          var ticker = element[index].firstChild.data;
+          console.log(ticker);
+          console.log(element)
+    
+          return this.ticker = ticker
+        },
+     */
 
 
 
@@ -104,6 +113,7 @@ export default {
 
     this.changeColor();
 
+
   },
 
   components: {
@@ -112,6 +122,7 @@ export default {
   props: {
     msg: String,
   },
+
 
 
 };
@@ -170,7 +181,7 @@ export default {
   padding: 1em;
   cursor: pointer;
   position: sticky;
-  top:0;
+  top: 0;
   z-index: 5;
   background: #5885AF;
 

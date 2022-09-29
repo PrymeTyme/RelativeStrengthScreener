@@ -21,6 +21,9 @@
   
 <script>
 import Chart from "chart.js/auto";
+import { useTickerStore } from "../stores/tickers.js"
+
+const tickerStore = useTickerStore()
 
 let stockPrice = []; // reverse order in datapoints ?
 let stockDate = [];
@@ -36,9 +39,15 @@ let myChart2;
 myChart2;
 
 
+
 export default {
 
     name: "LineChart",
+    data() {
+    return {
+      ticker: tickerStore.ticker
+    }
+  },
     mounted() {
         this.updateStockPriceHistoryChart();
         this.updateStockPriceHistoryChart2();
@@ -63,18 +72,18 @@ export default {
             return datapoints;
         },
 
-        async fetchData2() {
-            const url = 'http://localhost:3000/sectors';
+        async fetchData2(ticker) {
+            const url = 'http://localhost:3000/xlk_df';
             const response = await fetch(url);
             const datapoints = await response.json();
             console.log(Object.keys(datapoints));
             console.log(Object.values(datapoints));
-            console.log(datapoints["XLK"])
-            stockDate2 = Object.keys(datapoints["XLK"]);
+            console.log(datapoints[ticker])
+            stockDate2 = Object.keys(datapoints[ticker]);
             stockDate2 = stockDate2.reverse();
             stockDate2 = stockDate2.map(x => new Date(x * 1000));
             stockDate2 = stockDate2.map(x => x.toLocaleDateString());
-            stockPrice2 = Object.values(datapoints["XLK"]);
+            stockPrice2 = Object.values(datapoints[ticker]);
             stockPrice2 = stockPrice2.reverse();
             myChart2.config.data.datasets[0].data = stockPrice2;
             myChart2.config.data.labels = stockDate2;

@@ -8,7 +8,7 @@
           <div>Price </div>
           <div>Change%</div>
         </div>
-        <div class="listItem" v-for="item in items" :key="item">{{item.ticker}}
+        <div class="listItem" v-for="item , index in items" :key="item" @click="tickerStore.getTicker(index)">{{item.ticker}}
           <div id="price"> {{item.price}}</div>
           <div class="change" :style="{'color':item.changeColor}"> {{item.change}}</div>
         </div>
@@ -21,11 +21,16 @@
 <script>
 import LineChart from "./LineChartTest.vue";
 import itemList from "./Item.vue";
-import { getData } from "../getData.js"
+import { getData } from "../getData.js";
+import { useTickerStore } from "../stores/tickers.js"
+//import { storeToRefs } from 'pinia'
+//import {getTicker} from "../geTicker.js";
 //import { response } from "express";
 //import { init } from "events";
 //import { nextTick } from 'vue';
 //import VirtualList from "vue-virtual-scroll-list";
+
+
 
 export default {
   name: "HelloWorld",
@@ -33,8 +38,14 @@ export default {
     return {
       item: itemList,
       items: [],
-      colorList:[]
+      colorList: [],
     }
+  },
+
+  setup(){
+    const tickerStore = useTickerStore()
+    return {tickerStore}
+
   },
 
   methods: {
@@ -52,11 +63,22 @@ export default {
         // console.log(element);
         //console.log(element.length);
         console.log(element[i].innerHTML);
-  
+
 
       }
       return this.colorList = colorList
     },
+
+/*     getTicker(index) {
+      var element = document.getElementsByClassName('listItem');
+      var ticker = element[index].firstChild.data;
+      console.log(ticker);
+      console.log(element)
+
+      return this.ticker = ticker
+    },
+ */
+
 
 
   },
@@ -80,7 +102,7 @@ export default {
           document.addEventListener('DOMContentLoaded', function () { nextTick().then(() => { console.log(document.getElementsByClassName('change')) }) });
         this.$nextTick().then(() => { console.log(document.querySelectorAll('.change')) }), */
 
-    this.changeColor()
+    this.changeColor();
 
   },
 
@@ -125,8 +147,10 @@ export default {
   border-bottom: solid 2px #41729F;
   padding: 1em;
   cursor: pointer;
+  position: relative;
 
 }
+
 
 .listItem:hover {
   background-color: #41729F;
@@ -145,6 +169,10 @@ export default {
   border-bottom: solid 2px #41729F;
   padding: 1em;
   cursor: pointer;
+  position: sticky;
+  top:0;
+  z-index: 5;
+  background: #5885AF;
 
 }
 

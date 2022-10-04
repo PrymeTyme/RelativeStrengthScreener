@@ -34,6 +34,7 @@ import { storeToRefs } from 'pinia'
 
 
 
+
 export default {
   name: "HelloWorld",
   data() {
@@ -51,7 +52,7 @@ export default {
     const tickerStore = useTickerStore();
     const { ticker } = storeToRefs(tickerStore)
     const { getTicker } = tickerStore
-    return { tickerStore, ticker, getTicker }
+    return { tickerStore, ticker, getTicker}
 
   },
 
@@ -112,7 +113,6 @@ export default {
         this.$nextTick().then(() => { console.log(document.querySelectorAll('.change')) }), */
 
     this.changeColor();
-
 
   },
 

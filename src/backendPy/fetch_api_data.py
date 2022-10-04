@@ -5,7 +5,7 @@ import datetime
 
 
 
-client = TiingoClient({'api_key':'31bd0b18361e6b750e38ca5a99f9766143adfa45'})
+client = TiingoClient({'api_key':'YourAPIkey'})
 start_date = dt.today() - datetime.timedelta(days=365)
 end_date = str(dt.today().strftime('%Y-%m-%d'))
 

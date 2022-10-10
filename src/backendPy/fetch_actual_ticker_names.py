@@ -1,4 +1,5 @@
 import pandas as pd
+import json
 
 # get the sector into the list of stocks 
 def flatten(input_list):
@@ -53,4 +54,7 @@ stock_tickers = [xle_tickers,xlu_tickers,xlk_tickers,xlb_tickers,xlp_tickers,xly
 stock_tickers_clean = [[x for x in y if str(x) != 'nan'] for y in stock_tickers]
 
 stock_tickers_final = [[x for x in y if x.isalpha()]for y in stock_tickers_clean]
+
+with open("tickerNamesBackup.json",'w') as f:
+    json.dump(stock_tickers_final,f,indent=2)
 

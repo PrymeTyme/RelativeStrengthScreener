@@ -1,11 +1,15 @@
+from concurrent.futures import process
 from tiingo import TiingoClient
 from datetime import datetime as dt 
 from fetch_actual_ticker_names import stock_tickers_final
 import datetime
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 
-
-client = TiingoClient({'api_key':'YourAPIkey'})
+apiKey = os.getenv("API_KEY")
+client = TiingoClient({'api_key':apiKey})
 start_date = dt.today() - datetime.timedelta(days=365)
 end_date = str(dt.today().strftime('%Y-%m-%d'))
 

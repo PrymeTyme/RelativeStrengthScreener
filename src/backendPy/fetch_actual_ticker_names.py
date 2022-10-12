@@ -55,6 +55,6 @@ stock_tickers_clean = [[x for x in y if str(x) != 'nan'] for y in stock_tickers]
 
 stock_tickers_final = [[x for x in y if x.isalpha()]for y in stock_tickers_clean]
 
-with open("tickerNamesBackup.json",'w') as f:
+with open(r"C:\Users\Sergej\hello-world\data\tickerNamesBackup.json",'w') as f:
     json.dump(stock_tickers_final,f,indent=2)
 

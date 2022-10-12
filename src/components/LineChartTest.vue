@@ -77,7 +77,7 @@ export default {
         },
 
         async fetchData2(ticker) {
-            const url = 'http://localhost:3000/xlk_df';
+            const url = 'http://localhost:3000/sectors';
             const response = await fetch(url);
             const datapoints = await response.json();
             console.log(Object.keys(datapoints));

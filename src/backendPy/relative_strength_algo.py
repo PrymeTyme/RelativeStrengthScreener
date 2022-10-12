@@ -18,10 +18,10 @@ def rsc_algo_test(dataframe,timeframe):
 
 
 
-daily = slice(0,2)
-weekly = slice(0,6)
-monthly = slice(0,31)
-yearly = slice(0,366)
+#daily = slice(0,2)
+#weekly = slice(0,6)
+#monthly = slice(0,31)
+#yearly = slice(0,366)
 
 
 
@@ -42,6 +42,12 @@ yearly = slice(0,366)
 #sector_yearly_df =  pd.DataFrame(sector_yearly,columns=['Ticker','RSC','Price','Percent Change','Index'])
 
 #sector_daily_df.to_json(r'C:\Users\Sergej\hello-world\src\jsonData\sector_daily_df.json')
+#sector_daily_df.to_json(r'C:\Users\Sergej\hello-world\data\sector_daily_df_test.json')
+#sector_weekly_df.to_json(r'C:\Users\Sergej\hello-world\data\sector_weekly_df_test.json')
+#sector_monthly_df.to_json(r'C:\Users\Sergej\hello-world\data\sector_monthly_df_test.json')
+#sector_yearly_df.to_json(r'C:\Users\Sergej\hello-world\data\sector_yearly_df_test.json')
+
+
 
 
 

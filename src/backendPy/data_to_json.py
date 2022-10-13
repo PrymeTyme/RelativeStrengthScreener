@@ -1,6 +1,7 @@
 from fetch_api_data import sectors_data, ticker_data_list
+from fetch_actual_ticker_names import sector_stock_list
 
-sector_stock_list = ['xle','xlu','xlk','xlb','xlp','xly','xli','xlc','xlv','xlf','xlre']
+#sector_stock_list = ['xle','xlu','xlk','xlb','xlp','xly','xli','xlc','xlv','xlf','xlre']
 
 stock_dict = dict(zip(sector_stock_list,ticker_data_list))
 

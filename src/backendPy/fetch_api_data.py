@@ -30,10 +30,10 @@ def get_tickers(tickers,start_date,end_date):
 
     
 sectors = ['XLE','XLU','XLK','XLB','XLP','XLY','XLI','XLC','XLV','XLF','XLRE','SPY']
-sectors_app_stocks = ['XLE','XLU','XLK','XLB','XLP','XLY','XLI','XLC','XLV','XLF','XLRE']
+#sectors_app_stocks = ['XLE','XLU','XLK','XLB','XLP','XLY','XLI','XLC','XLV','XLF','XLRE']
 
 xle_df,xlu_df,xlk_df,xlb_df,xlp_df,xly_df,xli_df,xlc_df,xlv_df,xlf_df,xlre_df = (get_tickers(x,start_date,end_date) for x in stock_tickers_final) ## get from fetchTickernames
 
-ticker_dataframe_list = [xle_df,xlu_df,xlk_df,xlb_df,xlp_df,xly_df,xli_df,xlc_df,xlv_df,xlf_df,xlre_df]
+ticker_data_list = [xle_df,xlu_df,xlk_df,xlb_df,xlp_df,xly_df,xli_df,xlc_df,xlv_df,xlf_df,xlre_df] # raw ticker data
 
-sectors_df = get_tickers(sectors,start_date,end_date)
+sectors_data = get_tickers(sectors,start_date,end_date) # raw ticker data

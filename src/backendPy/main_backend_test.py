@@ -4,9 +4,9 @@ from relative_strength_algo import rsc_algo_test
 import pandas as pd
 
 if __name__ == '__main__':
-    print('from fetch tickers name ' + str(stock_tickers_final))
-    print('from fethc api sectors ' + str(sectors_data)) ## need to dump to json aswell ?
-    print('from tech api stocks list ' + str(ticker_data_list))
+   # print('from fetch tickers name ' + str(stock_tickers_final))
+    #print('from fethc api sectors ' + str(sectors_data)) ## need to dump to json aswell ?
+   # print('from tech api stocks list ' + str(ticker_data_list))
 
     daily = slice(0, 2)
     weekly = slice(0, 6)
@@ -16,10 +16,12 @@ if __name__ == '__main__':
 
 # run the rsc algo on sectors
 
-    sector_daily = rsc_algo_test(sectors_data, daily)
+    sector_daily = rsc_algo_test(sectors_data, daily)  # create dictonaries instead of variables ?
     sector_weekly = rsc_algo_test(sectors_data, weekly)
     sector_monthly = rsc_algo_test(sectors_data, monthly)
     sector_yearly = rsc_algo_test(sectors_data, yearly)
+
+
 
 
 # algo ouput into dataframe
@@ -37,9 +39,9 @@ if __name__ == '__main__':
     # pseudo code:
 
     # for x in sectors:
-        # pd.DataFrame(x,columns=['Ticker', 'RSC', 'Price', 'Percent Change', 'Index']).to_json(r'C:\Users\Sergej\hello-world\data\sectors\str(x)+'_df_'+'.json')
+        # pd.DataFrame(x,columns=['Ticker', 'RSC', 'Price', 'Percent Change', 'Index']).to_json(r'C:\Users\Sergej\hello-world\data\sectors\str(x)+'_df'+'.json')
 
 
 # add stock tickers final backup file handling here ?
 
-sectors_data.to_json(r'C:\Users\Sergej\hello-world\data\sectors_test.json')
+#sectors_data.to_json(r'C:\Users\Sergej\hello-world\data\sectors_test.json')

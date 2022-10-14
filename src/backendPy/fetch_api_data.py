@@ -1,4 +1,3 @@
-from concurrent.futures import process
 from tiingo import TiingoClient
 from datetime import datetime as dt 
 from fetch_actual_ticker_names import stock_tickers_final

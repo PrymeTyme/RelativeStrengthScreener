@@ -4,6 +4,22 @@ from relative_strength_algo import rsc_algo_test
 import pandas as pd
 
 if __name__ == '__main__':
+
+#1st  get actual ticker names from spdrwebsite , then save as backend
+    #if error get ticker list from backup
+
+#2nd fetch from tiingo api
+#  if  error , skip and use from json files
+# 
+# 3rd save raw ticker data (for charts) in json data
+# 
+# 4th run rsc algo on sectors
+#     save algo data to sector json
+# 
+# 5th run rsc algo on stocks
+#     save algo data to stock json    
+
+
    # print('from fetch tickers name ' + str(stock_tickers_final))
     #print('from fethc api sectors ' + str(sectors_data)) ## need to dump to json aswell ?
    # print('from tech api stocks list ' + str(ticker_data_list))

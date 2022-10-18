@@ -46,10 +46,10 @@ for filepath in glob.glob(os.path.join(r'C:\Users\Sergej\hello-world\data\stocks
             timeframe = string_timeframes[stock_counter]
             stock_df.to_json(fr'C:\Users\Sergej\hello-world\data\stockSorted\{timeframe}\{index_name}_{timeframe}.json')
 
-            print(timeframe +': \n'+str(stock_df)+'\n Index_Name = '+ index_name)
+            #print(timeframe +': \n'+str(stock_df)+'\n Index_Name = '+ index_name)
 
             if stock_counter >= 3 :   #horrible hard coded  but works ;) .. refactor later XD haha !
                 stock_counter = -1
 
 
-pd.set_option('display.max_rows', None)
+#pd.set_option('display.max_rows', None)

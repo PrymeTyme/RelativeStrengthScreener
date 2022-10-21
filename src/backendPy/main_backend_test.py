@@ -2,10 +2,13 @@ from fetch_actual_ticker_names import stock_tickers_final,sector_stock_list
 from fetch_api_data import fetch_tickers
 from datetime import datetime as dt
 from raw_data_to_json import save_sectors_to_json,save_stock_dict_to_json
+from algo_data_to_json import sector_to_json,stock_to_json
 
 
-import algo_data_to_json
 import datetime
+import asyncio
+
+
 
 
 if __name__ == '__main__':
@@ -35,9 +38,18 @@ if __name__ == '__main__':
     save_stock_dict_to_json(stock_dict) # wait
     save_sectors_to_json(sectors_data) # wait
 
-    algo_data_to_json
 # 4th run rsc algo on sectors
 #     save algo data to sector json
+    daily = slice(0,2)
+    weekly = slice(0,6)
+    monthly = slice(0,31)
+    yearly = slice(0,366)
+
+    timeframes = [daily,weekly,monthly,yearly]
+    string_timeframes = ['daily','weekly','monthly','yearly']
+
+    sector_to_json(timeframes,string_timeframes)
+    stock_to_json(timeframes,string_timeframes)
 
 # 
 # 5th run rsc algo on stocks

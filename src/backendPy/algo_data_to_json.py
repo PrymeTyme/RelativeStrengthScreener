@@ -15,7 +15,7 @@ string_timeframes = ['daily','weekly','monthly','yearly']
 
 
 
-def sector_to_json(timeframes,string_timeframes):
+def sorted_sector_to_json(timeframes,string_timeframes):
     sector_counter = -1   #horrible way of doing it but it works... ;) (refactor later... XD)
 
     with open(r'C:\Users\Sergej\hello-world\data\sectors\sectors.json') as f:
@@ -30,11 +30,11 @@ def sector_to_json(timeframes,string_timeframes):
         sector_counter +=1 
         timeframe=string_timeframes[sector_counter]
         sector_df.to_json(fr'C:\Users\Sergej\hello-world\data\sectorSorted\{timeframe}\{sector_name}_{timeframe}.json')
-        print(sector_name +' '+ timeframe)
+        #print(sector_name +' '+ timeframe)
 
 
 # Stock Tickers rsc algo > to dataframe > to json
-def stock_to_json(timeframes,string_timeframes):
+def sorted_stock_to_json(timeframes,string_timeframes):
     stock_counter = -1 
 
     for filepath in glob.glob(os.path.join(r'C:\Users\Sergej\hello-world\data\stocks','*.json')):
@@ -51,7 +51,8 @@ def stock_to_json(timeframes,string_timeframes):
                 timeframe = string_timeframes[stock_counter]
                 stock_df.to_json(fr'C:\Users\Sergej\hello-world\data\stockSorted\{timeframe}\{index_name}_{timeframe}.json')
 
-                print(timeframe +': \n'+str(stock_df)+'\n Index_Name = '+ index_name)
+                #print(timeframe +': \n'+str(stock_df)+'\n Index_Name = '+ index_name)
+                #print('stocks to df '+ index_name)
 
                 if stock_counter >= 3 :   #horrible hard coded  but works ;) .. refactor later XD haha !
                     stock_counter = -1
@@ -59,4 +60,3 @@ def stock_to_json(timeframes,string_timeframes):
 
 #pd.set_option('display.max_rows', None)
 
-sector_to_json(timeframes,string_timeframes)

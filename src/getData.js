@@ -11,7 +11,7 @@
 
 export async function getData() {
     const data = [];
-    const url = 'http://localhost:3000/sector_daily';
+    const url = 'http://localhost:3000/sorted_sector_daily';
     const response = await fetch(url);
     const datapoints = await response.json();
 

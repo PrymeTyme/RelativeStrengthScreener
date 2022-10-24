@@ -58,7 +58,7 @@ export default {
     },
     methods: {
         async fetchData() {
-            const url = 'http://localhost:3000/sectors';
+            const url = 'http://localhost:3000/raw_sectors';
             const response = await fetch(url);
             const datapoints = await response.json();
             console.log(Object.keys(datapoints));
@@ -77,7 +77,7 @@ export default {
         },
 
         async fetchData2(ticker) {
-            const url = 'http://localhost:3000/sectors';
+            const url = 'http://localhost:3000/raw_sectors';
             const response = await fetch(url);
             const datapoints = await response.json();
             console.log(Object.keys(datapoints));

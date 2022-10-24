@@ -55,12 +55,14 @@ try:
 
     stock_tickers_final = [[x for x in y if x.isalpha()]for y in stock_tickers_clean]
 
+    with open(r"C:\Users\Sergej\hello-world\data\tickerNamesBackup.json",'w') as f:
+        json.dump(stock_tickers_final,f,indent=2)
+
 except:
     print("catched error loading from backup")
 
     with open(r"C:\Users\Sergej\hello-world\data\tickerNamesBackup.json",'r') as f:
         stock_tickers_final =   json.load(f)
         
-#with open(r"C:\Users\Sergej\hello-world\data\tickerNamesBackup.json",'w') as f:
-    #json.dump(stock_tickers_final,f,indent=2)
+
 

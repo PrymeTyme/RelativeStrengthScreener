@@ -56,6 +56,4 @@ if __name__ == '__main__':
 #     save algo data to stock json    
 
 
-   # print('from fetch tickers name ' + str(stock_tickers_final))
-    #print('from fethc api sectors ' + str(sectors_data)) ## need to dump to json aswell ?
-   # print('from tech api stocks list ' + str(ticker_data_list))
+ 

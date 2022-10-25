@@ -236,6 +236,8 @@ export default {
     justify-content: center;
     border-radius: 10px;
     border: solid 3px #41729F;
+    grid-row-start: 2;
+    grid-column-start: 1;
 }
 
 .chartBox {

@@ -1,5 +1,7 @@
 <template>
   <div class="outerLayout">
+    <NavHead />
+    <div>timeframe place holder</div>
     <LineChart />
     <div class="vertL">
       <div v-if="items.length">
@@ -8,9 +10,9 @@
           <div>Price </div>
           <div>Change%</div>
         </div>
-        <div class="listItem" v-for="item , index in items" :key="item" @click="getTicker(index)">{{item.ticker}}
-          <div id="price"> {{item.price}}</div>
-          <div class="change" :style="{'color':item.changeColor}"> {{item.change}}</div>
+        <div class="listItem" v-for="item, index in items" :key="item" @click="getTicker(index)">{{ item.ticker }}
+          <div id="price"> {{ item.price }}</div>
+          <div class="change" :style="{ 'color': item.changeColor }"> {{ item.change }}</div>
         </div>
       </div>
     </div>
@@ -19,6 +21,7 @@
 
  
 <script>
+import NavHead from "./NavHead.vue"
 import LineChart from "./LineChartTest.vue";
 import itemList from "./Item.vue";
 import { getData } from "../getData.js";
@@ -52,7 +55,7 @@ export default {
     const tickerStore = useTickerStore();
     const { ticker } = storeToRefs(tickerStore)
     const { getTicker } = tickerStore
-    return { tickerStore, ticker, getTicker}
+    return { tickerStore, ticker, getTicker }
 
   },
 
@@ -118,6 +121,7 @@ export default {
 
   components: {
     LineChart,
+    NavHead,
   },
   props: {
     msg: String,
@@ -133,21 +137,24 @@ export default {
 .vertL {
   overflow-y: scroll;
   float: right;
-  background: #5885AF;
   border-radius: 10px;
   border: solid 2px #41729F;
-  height: 888px;
+  grid-column-start: 2;
+  grid-row-start: 2;
+  height: calc(100vh - 40px);
+
 }
 
 .outerLayout {
   display: grid;
+  grid-template-rows: 10% auto;
   grid-template-columns: 80% auto;
   overflow: auto;
   border: 5px solid #41729F;
   border-radius: 5px;
   padding: 0;
   margin: 5%;
-  margin-top: 5px;
+  margin-top: 0px;
   background-color: #41729F;
   ;
 }
@@ -159,6 +166,9 @@ export default {
   padding: 1em;
   cursor: pointer;
   position: relative;
+  border-radius: 5px;
+  background: #5885AF;
+  transition: 0.4s;
 
 }
 
@@ -166,10 +176,12 @@ export default {
 .listItem:hover {
   background-color: #41729F;
   color: #C3E0E5;
+  transition: 0.4s;
+
 }
 
 .listItem:active {
-  color: #41729fd0;
+  color:#C3E0E5;
   background-color: #41729f4b;
   transform: translateY(4px);
 }
@@ -184,6 +196,7 @@ export default {
   top: 0;
   z-index: 5;
   background: #5885AF;
+  border-radius: 5px;
 
 }
 

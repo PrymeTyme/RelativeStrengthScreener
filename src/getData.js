@@ -9,9 +9,9 @@
 
 
 
-export async function getData() {
+export async function getData(ticker,timeframe) {
     const data = [];
-    const url = 'http://localhost:3000/sorted_sector_daily';
+    const url = `http://localhost:3000/sorted_${ticker}_${timeframe}`;
     const response = await fetch(url);
     const datapoints = await response.json();
 

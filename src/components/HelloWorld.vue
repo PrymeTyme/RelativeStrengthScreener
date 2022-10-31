@@ -35,6 +35,9 @@ import { storeToRefs } from 'pinia'
 //import { nextTick } from 'vue';
 //import VirtualList from "vue-virtual-scroll-list";
 
+let default_timeframe = 'daily'
+let default_ticker = 'sector'
+
 
 
 
@@ -97,7 +100,7 @@ export default {
   },
 
   async created() {
-    getData().then(response => {
+    getData(default_ticker,default_timeframe).then(response => {
       console.log(response);
       this.items = response;
     })

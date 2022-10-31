@@ -10,7 +10,7 @@
         <transition name="fade" appear>
             <div class="sub-menu" v-if="isOpen">
                 <div v-for="(item, i) in items" :key="i" class="menu-item">
-                    <a>{{ item.title }}</a>
+                    <a @click="getTimeframe(item.title.toLowerCase())" >{{ item.title }}</a>
                 </div>
             </div>
         </transition>
@@ -18,7 +18,9 @@
 
 </template>
 
+
 <script>
+
 export default {
     name: 'dropDown',
     props: ['title', 'items'],
@@ -26,7 +28,15 @@ export default {
         return {
             isOpen: false
         }
-    }
+    },
+
+    methods:{
+        getTimeframe(timeframe){
+           console.log(timeframe)
+           return timeframe
+        }
+    },
+
 }
 
 </script>

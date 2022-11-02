@@ -1,7 +1,7 @@
 <template>
   <div class="outerLayout">
     <NavHead />
-    <div>timeframe place holder</div>
+    <div>{{this.timeframe}}</div>
     <LineChart />
     <div class="vertL">
       <div v-if="items.length">
@@ -26,16 +26,22 @@ import LineChart from "./LineChartTest.vue";
 import itemList from "./Item.vue";
 import { getData } from "../getData.js";
 import { useTickerStore } from "../stores/tickers.js"
+import { useTimeframeStore } from "../stores/timeframes.js";
 //import { computed } from "@vue/reactivity";
+import { mapState } from 'pinia'
+
 //import { ref } from "vue";
-import { storeToRefs } from 'pinia'
+import { storeToRefs } from 'pinia';
 //import {getTicker} from "../geTicker.js";
 //import { response } from "express";
 //import { init } from "events";
 //import { nextTick } from 'vue';
 //import VirtualList from "vue-virtual-scroll-list";
 
-let default_timeframe = 'daily'
+//const timeframeStore = useTimeframeStore();
+//const {timeframe} = storeToRefs(timeframeStore);
+
+//let default_timeframe = 'daily'
 let default_ticker = 'sector'
 
 
@@ -51,6 +57,12 @@ export default {
     }
   },
 
+  computed:{
+
+    ...mapState(useTimeframeStore,['timeframe']) // to use this.timeframe in component
+
+  },
+
   setup() {
     /*    const tickerStore =useTickerStore();
        return{tickerStore} */
@@ -58,7 +70,12 @@ export default {
     const tickerStore = useTickerStore();
     const { ticker } = storeToRefs(tickerStore)
     const { getTicker } = tickerStore
-    return { tickerStore, ticker, getTicker }
+
+    const timeframeStore = useTimeframeStore();
+    const { timeframe } = storeToRefs(timeframeStore)
+    const { getTimeframe } = timeframeStore
+
+    return { tickerStore, ticker, getTicker,timeframeStore,timeframe,getTimeframe }
 
   },
 
@@ -100,14 +117,27 @@ export default {
   },
 
   async created() {
-    getData(default_ticker,default_timeframe).then(response => {
+    getData(default_ticker,this.timeframe).then(response => {
       console.log(response);
       this.items = response;
     })
 
   },
 
-  updated() {
+  watch: {
+      timeframe: async function() {
+        if (this.timeframe) {
+          this.items = await getData(default_ticker,this.timeframe);
+        }
+      }
+    },
+
+  updated() { // runs after watch
+    
+   // getData(default_ticker,this.timeframe).then(response => {
+   //   console.log(response);
+   //   this.items = response;
+   // })
     /*     document.onreadystatechange = () => {
           if (document.readyState == "complete") {
             this.changeColor();
@@ -118,7 +148,9 @@ export default {
           document.addEventListener('DOMContentLoaded', function () { nextTick().then(() => { console.log(document.getElementsByClassName('change')) }) });
         this.$nextTick().then(() => { console.log(document.querySelectorAll('.change')) }), */
 
-    this.changeColor();
+    //this.changeColor();
+    //console.log('watched '+this.timeframe)
+    //console.log(this.items[0])
 
   },
 

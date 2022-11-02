@@ -21,6 +21,10 @@
 
 <script>
 
+//import { getData } from "../getData.js";
+import { useTimeframeStore } from "../stores/timeframes.js"
+import { storeToRefs } from 'pinia'
+
 export default {
     name: 'dropDown',
     props: ['title', 'items'],
@@ -31,11 +35,21 @@ export default {
     },
 
     methods:{
-        getTimeframe(timeframe){
+        getTimeframe1(timeframe){
            console.log(timeframe)
            return timeframe
         }
     },
+
+    setup() {
+
+
+    const timeframeStore = useTimeframeStore();
+    const { timeframe } = storeToRefs(timeframeStore)
+    const { getTimeframe } = timeframeStore
+    return { timeframeStore, timeframe, getTimeframe }
+
+  },
 
 }
 

@@ -10,10 +10,14 @@
 
         <div class="body" v-show="showSection">
             <div id="options">
-                <div class="option" v-for="item in items" :key="item"  @click="getOption(item)" >{{ item }}</div>
+                <div class="option" v-for="item in items" :key="item" @click="getOption(item.text)">{{ item.text }}
+                    <div class="icon"> {{ item.icon }}</div>
+                </div>
+                <div></div>
             </div>
         </div>
     </div>
+
 </template>
 
 
@@ -33,10 +37,7 @@ export default {
     data() {
         return {
             showSection: false,
-            items:['Open in Chart','Open Stocks of Sector','Add to Watchlist'],
-            openInChart: 'Open in Chart',
-            openStockList: 'Open Stocks of Sector', // add variable
-            addToWatchlist: 'Add to Watchlist',
+            items: [{ text: 'Open in Chart', icon: '+' }, { text: 'Show Sector Holdings', icon: '#' }, { text: 'Add to Watchlist', icon: '/' }], // change to objects with value
         }
     }
 }
@@ -68,6 +69,8 @@ export default {
 .option {
     text-align: left;
     margin-top: 2%;
+    display: grid;
+    grid-template-columns: 60% auto;
 }
 
 .option:hover {
@@ -75,6 +78,14 @@ export default {
     width: 320px;
     margin-top: 2%;
     text-align: left;
+}
+
+.icon{
+    margin-left: 69%;
+}
+
+.icon:hover{
+    color: black;
 }
 
 </style>

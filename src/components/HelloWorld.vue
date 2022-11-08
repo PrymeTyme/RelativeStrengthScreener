@@ -235,7 +235,7 @@ export default {
 
 .listHead {
   display: grid;
-  grid-template-columns: 33% 33% 33%;
+  grid-template-columns: 25% 30% 35%;
   border-bottom: solid 2px #41729F;
   padding: 1em;
   cursor: pointer;

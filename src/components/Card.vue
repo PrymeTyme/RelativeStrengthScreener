@@ -1,4 +1,5 @@
 <template id="card">
+
     <div class="section">
         <div class="title" v-on:click="toggle">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
@@ -11,7 +12,7 @@
         <div class="body" v-show="showSection">
             <div id="options">
                 <div class="option" v-for="item in items" :key="item" @click="getOption(item.text)">{{ item.text }}
-                    <div class="icon"> {{ item.icon }}</div>
+                    <div class="icon"><fa v-bind:icon="item.icon"/></div>
                 </div>
                 <div></div>
             </div>
@@ -22,6 +23,7 @@
 
 
 <script>
+
 export default {
     name: 'CardTest',
     template: '#card',
@@ -37,7 +39,7 @@ export default {
     data() {
         return {
             showSection: false,
-            items: [{ text: 'Open in Chart', icon: '+' }, { text: 'Show Sector Holdings', icon: '#' }, { text: 'Add to Watchlist', icon: '/' }], // change to objects with value
+            items: [{ text: 'Open in Chart', icon: 'line-chart' }, { text: 'Show Sector Holdings', icon: 'list-dots' }, { text: 'Add to Watchlist', icon: 'add' }], // change to objects with value
         }
     }
 }

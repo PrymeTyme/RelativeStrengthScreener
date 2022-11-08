@@ -1,7 +1,7 @@
 <template>
   <div class="outerLayout">
     <NavHead />
-    <div>{{this.timeframe}}</div>
+    <div>{{ this.timeframe }}</div>
     <LineChart />
     <div class="vertL">
       <div v-if="items.length">
@@ -13,6 +13,7 @@
         <div class="listItem" v-for="item, index in items" :key="item" @click="getTicker(index)">{{ item.ticker }}
           <div id="price"> {{ item.price }}</div>
           <div class="change" :style="{ 'color': item.changeColor }"> {{ item.change }}</div>
+          <card></card>
         </div>
       </div>
     </div>
@@ -24,6 +25,9 @@
 import NavHead from "./NavHead.vue"
 import LineChart from "./LineChartTest.vue";
 import itemList from "./Item.vue";
+
+import Card from "./Card.vue"
+
 import { getData } from "../getData.js";
 import { useTickerStore } from "../stores/tickers.js"
 import { useTimeframeStore } from "../stores/timeframes.js";
@@ -54,12 +58,16 @@ export default {
       item: itemList,
       items: [],
       colorList: [],
+      dropdownlist:[
+        {title:'add to watchlist'},
+        {title: 'show stocks'}
+      ]
     }
   },
 
-  computed:{
+  computed: {
 
-    ...mapState(useTimeframeStore,['timeframe']) // to use this.timeframe in component
+    ...mapState(useTimeframeStore, ['timeframe']) // to use this.timeframe in component
 
   },
 
@@ -75,7 +83,7 @@ export default {
     const { timeframe } = storeToRefs(timeframeStore)
     const { getTimeframe } = timeframeStore
 
-    return { tickerStore, ticker, getTicker,timeframeStore,timeframe,getTimeframe }
+    return { tickerStore, ticker, getTicker, timeframeStore, timeframe, getTimeframe }
 
   },
 
@@ -117,7 +125,7 @@ export default {
   },
 
   async created() {
-    getData(default_ticker,this.timeframe).then(response => {
+    getData(default_ticker, this.timeframe).then(response => {
       console.log(response);
       this.items = response;
     })
@@ -125,19 +133,19 @@ export default {
   },
 
   watch: {
-      timeframe: async function() {
-        if (this.timeframe) {
-          this.items = await getData(default_ticker,this.timeframe);
-        }
+    timeframe: async function () {
+      if (this.timeframe) {
+        this.items = await getData(default_ticker, this.timeframe);
       }
-    },
+    }
+  },
 
   updated() { // runs after watch
-    
-   // getData(default_ticker,this.timeframe).then(response => {
-   //   console.log(response);
-   //   this.items = response;
-   // })
+
+    // getData(default_ticker,this.timeframe).then(response => {
+    //   console.log(response);
+    //   this.items = response;
+    // })
     /*     document.onreadystatechange = () => {
           if (document.readyState == "complete") {
             this.changeColor();
@@ -157,6 +165,8 @@ export default {
   components: {
     LineChart,
     NavHead,
+    Card,
+    
   },
   props: {
     msg: String,
@@ -196,7 +206,7 @@ export default {
 
 .listItem {
   display: grid;
-  grid-template-columns: 33% 33% 33%;
+  grid-template-columns: 30% 30% 30% auto;
   border-bottom: solid 2px #41729F;
   padding: 1em;
   cursor: pointer;
@@ -204,6 +214,7 @@ export default {
   border-radius: 5px;
   background: #5885AF;
   transition: 0.4s;
+  justify-content: center;
 
 }
 
@@ -216,10 +227,11 @@ export default {
 }
 
 .listItem:active {
-  color:#C3E0E5;
+  color: #C3E0E5;
   background-color: #41729f4b;
   transform: translateY(4px);
 }
+
 
 .listHead {
   display: grid;
@@ -233,6 +245,29 @@ export default {
   background: #5885AF;
   border-radius: 5px;
 
+}
+
+.listItem>.icon {
+  color: black !important;
+  transition: 0.4s;
+  border-left:  2px solid #41729F;
+  background: #5885AF;
+  justify-content: center;
+  top: 0;
+  width: 8%;
+  height: 100%;
+  position: absolute;
+  margin-left: 290px;
+
+
+}
+
+
+.listItem>.icon:hover {
+  background-color: #5885AF !important;
+  color: #C3E0E5 !important;
+  transition: 0.4s;
+  
 }
 
 

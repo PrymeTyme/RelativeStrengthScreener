@@ -2,7 +2,7 @@
     <div class="chartCard">
         <div class="chartBox">
             <div>
-                <button class="buttons" @click="fetchData()">fetch</button>
+                <button class="buttons" @click="fetchData(ticker)">fetch</button>
             </div>
             <canvas id="myChart"></canvas>
         </div>
@@ -45,6 +45,7 @@ let myChart2;
 myChart2;
 
 var tickerLabel = "";
+var tickerLabel1 = "";
 
 var default_ticker = "SPY";
 
@@ -65,21 +66,26 @@ export default {
         this.updateStockPriceHistoryChart2();
     },
     methods: {
-        async fetchData() {
-            const url = 'http://localhost:3000/raw_sectors';
+        async fetchData(ticker,path) {
+            const url = `http://localhost:3000/raw_${path}`;
             const response = await fetch(url);
             const datapoints = await response.json();
             console.log(Object.keys(datapoints));
             console.log(Object.values(datapoints));
-            console.log(datapoints["SPY"])
-            stockDate = Object.keys(datapoints["SPY"]);
+            console.log(ticker);
+            ticker = ticker.trim();
+            tickerLabel1 = ticker;
+            console.log("label= " + tickerLabel1)
+            console.log(datapoints[ticker])
+            stockDate = Object.keys(datapoints[ticker]);
             stockDate = stockDate.reverse();
             stockDate = stockDate.map(x => new Date(x * 1000));
             stockDate = stockDate.map(x => x.toLocaleDateString());
-            stockPrice = Object.values(datapoints["SPY"]);
+            stockPrice = Object.values(datapoints[ticker]);
             stockPrice = stockPrice.reverse();
             myChart.config.data.datasets[0].data = stockPrice;
             myChart.config.data.labels = stockDate;
+            myChart.config.data.datasets[0].label = tickerLabel1;
             myChart.update();
             return datapoints;
         },
@@ -116,7 +122,7 @@ export default {
             if (this.option == 'chart' && check_sectors.includes(this.ticker)) {
                 this.$nextTick(function(){
                     this.fetchData2(this.ticker,'sectors')
-                    this.fetchData(default_ticker)
+                    this.fetchData(default_ticker,'sectors')
                     this.option="";
                 })
             }
@@ -125,7 +131,7 @@ export default {
                 this.$nextTick(function(){
                     var path = this.index.toLowerCase().trim()
                     this.fetchData2(this.ticker,path)
-                    this.fetchData(default_ticker)
+                    this.fetchData(this.index,'sectors')
                     this.option="";
                 })
             }
@@ -174,7 +180,7 @@ export default {
                 labels: labels,
                 datasets: [
                     {
-                        label: "Stock Market Price",
+                        label: tickerLabel1,
                         data: stockPrice,
                         fill: false,
                         borderColor: "rgb(75,192,192",

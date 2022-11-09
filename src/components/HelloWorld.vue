@@ -144,7 +144,7 @@ export default {
   watch: {
     timeframe: async function () {
       if (this.timeframe) {
-        this.items = await getData(this.index.toLowerCase().trim(), this.timeframe);
+        this.items = await getData(this.ticker.toLowerCase().trim(), this.timeframe);
       }
     },
     option: async function(){

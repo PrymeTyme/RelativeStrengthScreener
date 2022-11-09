@@ -38,12 +38,12 @@ export default {
 <style>
 nav {
     width: 70vw;
-    background-color: #0d0d0e;
+    background-color: #131722; 
     display: flex;
     align-items: center;
     justify-content: left;
     border-radius: 10px;
-    border: solid 3px #41729F;
+    border: solid 3px #2A2E39;
 }
 
 nav .menu-item {
@@ -58,8 +58,8 @@ nav .menu-item {
 
 nav .menu-item.active,
 nav .menu-item:hover {
-    background-color: #0d0d0e;
-    border-bottom-color: #bb3030;
+    background-color: #131722; 
+    border-bottom-color: #E3B844;
     cursor: pointer;
 }
 

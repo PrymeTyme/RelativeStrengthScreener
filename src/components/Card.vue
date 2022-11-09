@@ -74,12 +74,12 @@ export default {
     left: 50%;
     transform: translateX(-100%);
     width: 320px;
-    border-top: 2px solid #41729F;
+    border-top: 2px solid #2A2E39;
     margin-left: 120%;
 }
 
 .body:hover {
-    border-top: 2px solid #5885AF;
+    border-top: 2px solid #131722;
 }
 
 .option {
@@ -89,11 +89,12 @@ export default {
     grid-template-columns: 60% auto;
 }
 
-.option:hover {
-    background: #5885AF;
+.option:hover{
     width: 320px;
     margin-top: 2%;
     text-align: left;
+    color: #E3B844;
+
 }
 
 .icon{
@@ -101,8 +102,9 @@ export default {
 }
 
 .icon:hover{
-    color: black;
+    color: #E3B844;
 }
+
 
 </style>
   

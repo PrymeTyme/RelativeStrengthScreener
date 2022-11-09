@@ -1,7 +1,7 @@
 <template>
   <div class="outerLayout">
     <NavHead />
-    <div>{{ this.timeframe }}-{{this.index}}-{{this.ticker}}</div>
+    <div style="color:#C3E0E5" >{{ this.timeframe }}-{{this.index}}-{{this.ticker}}</div>
     <LineChart />
     <div class="vertL">
       <div v-if="items.length">
@@ -49,6 +49,7 @@ import { storeToRefs } from 'pinia';
 //let default_timeframe = 'daily'
 //let default_ticker = 'sector'
 
+const check_sectors = ['XLE','XLU','XLK','XLB','XLP','XLY','XLI','XLC','XLV','XLF','XLRE','SPY'];
 
 
 
@@ -143,8 +144,15 @@ export default {
 
   watch: {
     timeframe: async function () {
-      if (this.timeframe) {
-        this.items = await getData(this.ticker.toLowerCase().trim(), this.timeframe);
+      if (this.timeframe && this.ticker == 'sector') {
+        this.items = await getData(this.ticker.toLowerCase().trim(), this.timeframe); // changes to ticker vs index ???
+      }
+      else if(this.timeframe && check_sectors.includes(this.ticker)){
+        this.items = await getData('sector', this.timeframe); // changes to ticker vs index ???
+      }
+      else if(this.timeframe){
+        this.items = await getData(this.index.toLowerCase().trim(), this.timeframe); // changes to ticker vs index ??? something logical!
+
       }
     },
     option: async function(){
@@ -199,7 +207,7 @@ export default {
   overflow-y: scroll;
   float: right;
   border-radius: 10px;
-  border: solid 2px #41729F;
+  border: solid 2px #2A2E39; 
   grid-column-start: 2;
   grid-row-start: 2;
   height: calc(100vh - 40px);
@@ -211,32 +219,33 @@ export default {
   grid-template-rows: 10% auto;
   grid-template-columns: 80% auto;
   overflow: auto;
-  border: 5px solid #41729F;
+  border: 5px solid #2A2E39;
   border-radius: 5px;
   padding: 0;
   margin: 5%;
   margin-top: 0px;
-  background-color: #41729F;
-  ;
+  background-color: #2A2E39;
+  
 }
 
 .listItem {
   display: grid;
   grid-template-columns: 30% 30% 30% auto;
-  border-bottom: solid 2px #41729F;
+  border-bottom: solid 2px #2A2E39;
   padding: 1em;
   cursor: pointer;
   position: relative;
   border-radius: 5px;
-  background: #5885AF;
+  background: #131722;
   transition: 0.4s;
   justify-content: center;
+  color: #C3E0E5;
 
 }
 
 
 .listItem:hover {
-  background-color: #41729F;
+  background-color: #2A2E39;
   color: #C3E0E5;
   transition: 0.4s;
 
@@ -244,7 +253,7 @@ export default {
 
 .listItem:active {
   color: #C3E0E5;
-  background-color: #41729f4b;
+  background-color: #131722;
   transform: translateY(4px);
 }
 
@@ -252,22 +261,23 @@ export default {
 .listHead {
   display: grid;
   grid-template-columns: 25% 30% 35%;
-  border-bottom: solid 2px #41729F;
+  border-bottom: solid 2px #2A2E39;
   padding: 1em;
   cursor: pointer;
   position: sticky;
   top: 0;
   z-index: 5;
-  background: #5885AF;
+  background:  #131722;
   border-radius: 5px;
+  color: #C3E0E5;
 
 }
 
 .listItem>.icon {
   color: black !important;
   transition: 0.4s;
-  border-left:  2px solid #41729F;
-  background: #5885AF;
+  border-left:  2px solid #2A2E39;
+  background: #131722;
   justify-content: center;
   top: 0;
   width: 8%;
@@ -280,7 +290,7 @@ export default {
 
 
 .listItem>.icon:hover {
-  background-color: #5885AF !important;
+  background-color: #131722 !important;
   color: #C3E0E5 !important;
   transition: 0.4s;
   

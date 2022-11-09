@@ -62,7 +62,7 @@ nav .menu-item svg {
 
 nav .menu-item .sub-menu {
     position: absolute;
-    background-color: #222;
+    background-color: #131722d5;
     top: calc(100% + 5px);
     left: 50%;
     transform: translateX(-50%);
@@ -70,6 +70,7 @@ nav .menu-item .sub-menu {
     z-index: 5;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+    border: 1px solid #E3B844;
 
 }
 

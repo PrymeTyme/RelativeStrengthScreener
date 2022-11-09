@@ -2,13 +2,13 @@
     <div class="chartCard">
         <div class="chartBox">
             <div>
-                <button class="buttons" @click="fetchData(ticker)">fetch</button>
+                
             </div>
             <canvas id="myChart"></canvas>
         </div>
         <div class="chartBox">
             <div>
-                <button class="buttons" @click="fetchData2(ticker)">fetch2</button>
+               <!-- <button class="buttons" @click="fetchData2(ticker)">fetch2</button> -->
             </div>
             <canvas id="myChart2"></canvas>
         </div>
@@ -170,7 +170,7 @@ export default {
                     const { ctx } = chart;
                     ctx.save();
                     ctx.globalCompositeOperation = 'destination-over';
-                    ctx.fillStyle = '#C3E0E5';
+                    ctx.fillStyle = '#2A2E39';
                     ctx.fillRect(0, 0, chart.width, chart.height);
                     ctx.restore();
                 }
@@ -215,7 +215,7 @@ export default {
                     const { ctx } = chart;
                     ctx.save();
                     ctx.globalCompositeOperation = 'destination-over';
-                    ctx.fillStyle = '#C3E0E5';
+                    ctx.fillStyle = '#2A2E39';
                     ctx.fillRect(0, 0, chart.width, chart.height);
                     ctx.restore();
                 }
@@ -282,12 +282,12 @@ export default {
 .chartCard {
     width: 70vw;
     height: calc(100vh - 40px);
-    background: #5885AF;
+    background:  #131722;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 10px;
-    border: solid 3px #41729F;
+    border: solid 3px #2A2E39;
     grid-row-start: 2;
     grid-column-start: 1;
 }
@@ -297,8 +297,8 @@ export default {
     width: 700px;
     padding: 20px;
     border-radius: 20px;
-    border: solid 1px #41729F;
-    background: #C3E0E5;
+    border: solid 5px #131722;
+    background: #2A2E39;
 }
 
 .buttons {
@@ -308,20 +308,20 @@ export default {
     text-align: center;
     text-decoration: none;
     outline: none;
-    color: #41729fd0;
-    background-color: #41729f4b;
-    border: solid 2px #41729F;
+    color:  #131722d0;
+    background-color:  #1317224b;
+    border: solid 2px  #131722;
     border-radius: 10px;
 }
 
 .buttons:hover {
-    background-color: #41729F;
+    background-color:  #131722;
     color: #C3E0E5;
 }
 
 .buttons:active {
-    color: #41729fd0;
-    background-color: #41729f4b;
+    color: #2A2E39d0;
+    background-color: #2A2E394b;
     transform: translateY(4px);
 }
 
@@ -353,11 +353,11 @@ export default {
     .chartCard {
         width: 70vw;
         height: calc(100vh - 40px);
-        background: #5885AF;
+        background: #2A2E39;
         display: block;
         align-items: center;
         border-radius: 20px;
-        border: solid 5px #41729F;
+        border: solid 5px #2A2E39;
     }
 }
 </style>

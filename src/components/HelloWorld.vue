@@ -31,6 +31,7 @@ import Card from "./Card.vue"
 import { getData } from "../getData.js";
 import { useTickerStore } from "../stores/tickers.js"
 import { useTimeframeStore } from "../stores/timeframes.js";
+import { useOptionStore } from "../stores/options.js";
 //import { computed } from "@vue/reactivity";
 import { mapState } from 'pinia'
 
@@ -46,7 +47,7 @@ import { storeToRefs } from 'pinia';
 //const {timeframe} = storeToRefs(timeframeStore);
 
 //let default_timeframe = 'daily'
-let default_ticker = 'sector'
+//let default_ticker = 'sector'
 
 
 
@@ -67,7 +68,9 @@ export default {
 
   computed: {
 
-    ...mapState(useTimeframeStore, ['timeframe']) // to use this.timeframe in component
+    ...mapState(useTimeframeStore, ['timeframe']),
+    ...mapState(useOptionStore, ['option']), // to use this.xxx 
+    ...mapState(useTickerStore,['ticker']),
 
   },
 
@@ -83,7 +86,12 @@ export default {
     const { timeframe } = storeToRefs(timeframeStore)
     const { getTimeframe } = timeframeStore
 
-    return { tickerStore, ticker, getTicker, timeframeStore, timeframe, getTimeframe }
+    const optionStore = useOptionStore();
+    const { option } = storeToRefs(optionStore)
+    const { getOption } = optionStore
+
+
+    return { tickerStore, ticker, getTicker, timeframeStore, timeframe, getTimeframe,optionStore,option,getOption }
 
   },
 
@@ -125,7 +133,7 @@ export default {
   },
 
   async created() {
-    getData(default_ticker, this.timeframe).then(response => {
+    getData(this.ticker, this.timeframe).then(response => {
       console.log(response);
       this.items = response;
     })
@@ -135,8 +143,15 @@ export default {
   watch: {
     timeframe: async function () {
       if (this.timeframe) {
-        this.items = await getData(default_ticker, this.timeframe);
+        this.items = await getData(this.ticker.toLowerCase().trim(), this.timeframe);
       }
+    },
+    option: async function(){
+      if(this.option == 'show' ){
+        this.items = await getData(this.ticker.toLowerCase().trim(),this.timeframe)
+        this.option = ''
+      }
+
     }
   },
 

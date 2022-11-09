@@ -11,7 +11,7 @@
 
         <div class="body" v-show="showSection">
             <div id="options">
-                <div class="option" v-for="item in items" :key="item" @click="getOption(item.text)">{{ item.text }}
+                <div class="option" v-for="item in items" :key="item" @click="getOption(item.id)">{{ item.text }}
                     <div class="icon"><fa v-bind:icon="item.icon"/></div>
                 </div>
                 <div></div>
@@ -24,6 +24,9 @@
 
 <script>
 
+import {useOptionStore} from '../stores/options.js'
+import { storeToRefs } from 'pinia'
+
 export default {
     name: 'CardTest',
     template: '#card',
@@ -32,16 +35,27 @@ export default {
             this.showSection = !this.showSection
         },
 
-        getOption(item) {
+        getOption1(item) {
             console.log(item)
+            return item
         },
     },
     data() {
         return {
             showSection: false,
-            items: [{ text: 'Open in Chart', icon: 'line-chart' }, { text: 'Show Sector Holdings', icon: 'list-dots' }, { text: 'Add to Watchlist', icon: 'add' }], // change to objects with value
+            items: [{ text: 'Open in Chart', icon: 'line-chart',id:'chart' }, { text: 'Show Sector Holdings', icon: 'list-dots',id:'show' }, { text: 'Add to Watchlist', icon: 'add',id:'add' }], // change to objects with value
         }
-    }
+    },
+
+    setup() {
+
+
+    const optionStore = useOptionStore();
+    const { option } = storeToRefs(optionStore)
+    const { getOption } = optionStore
+    return { optionStore, option, getOption }
+
+},
 }
 </script>
 

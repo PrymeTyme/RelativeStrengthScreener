@@ -23,6 +23,11 @@
 import Chart from "chart.js/auto";
 import { useTickerStore } from "../stores/tickers.js"
 import { storeToRefs } from 'pinia'
+import { mapState } from 'pinia'
+import { useOptionStore } from "../stores/options.js"
+import { getChart } from "../getChart.js"
+
+
 //import { ref } from "vue"
 
 
@@ -41,6 +46,9 @@ myChart2;
 
 var tickerLabel = "";
 
+var default_ticker = "SPY";
+
+const check_sectors = ['XLE','XLU','XLK','XLB','XLP','XLY','XLI','XLC','XLV','XLF','XLRE','SPY'];
 
 
 
@@ -76,8 +84,8 @@ export default {
             return datapoints;
         },
 
-        async fetchData2(ticker) {
-            const url = 'http://localhost:3000/raw_sectors';
+        async fetchData2(ticker,path) {
+            const url = `http://localhost:3000/raw_${path}`;
             const response = await fetch(url);
             const datapoints = await response.json();
             console.log(Object.keys(datapoints));
@@ -100,12 +108,47 @@ export default {
             return datapoints;
         },
 
+    }, // if async created i need to put in arguments/parameters aswell..!!
+
+
+    watch: {
+        option: async function () {
+            if (this.option == 'chart' && check_sectors.includes(this.ticker)) {
+                this.$nextTick(function(){
+                    this.fetchData2(this.ticker,'sectors')
+                    this.fetchData(default_ticker)
+                    this.option="";
+                })
+            }
+
+            if (this.option == 'chart' && !check_sectors.includes(this.ticker)) {
+                this.$nextTick(function(){
+                    var path = this.ticker.toLowerCase().trim()
+                    this.fetchData2(this.ticker,path)
+                    this.fetchData(default_ticker)
+                    this.option="";
+                })
+            }
+            
+        }
+    },
+
+    computed: {
+
+        ...mapState(useOptionStore, ['option']), // to use this.xxx
+        ...mapState(useTickerStore, ['ticker']), // to use this.xxx
+
     },
     setup() {
 
         const tickerStore = useTickerStore();
         const { ticker } = storeToRefs(tickerStore)
         const { getTicker } = tickerStore
+
+        const optionStore = useOptionStore();
+        const { option } = storeToRefs(optionStore)
+        const { getOption } = optionStore
+
 
 
 
@@ -202,6 +245,8 @@ export default {
             updateStockPriceHistoryChart,
             updateStockPriceHistoryChart2,
             tickerStore, ticker, getTicker,
+            optionStore, option, getOption,
+            getChart,
         };
     },
 };

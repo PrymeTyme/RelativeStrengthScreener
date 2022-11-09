@@ -23,7 +23,7 @@ import { ref } from "vue";
  export const useTickerStore = defineStore({
     id: 'tickers',
     state: () => ({
-        ticker: ref("")
+        ticker: ref("sector")
 
 
     }),

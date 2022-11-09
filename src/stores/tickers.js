@@ -20,10 +20,13 @@ import { ref } from "vue";
     }
 ) */
 
+const check_sectors = ['XLE','XLU','XLK','XLB','XLP','XLY','XLI','XLC','XLV','XLF','XLRE','SPY'];
+
  export const useTickerStore = defineStore({
     id: 'tickers',
     state: () => ({
-        ticker: ref("sector")
+        ticker: ref("sector"),
+        index: ref('')
 
 
     }),
@@ -32,7 +35,10 @@ import { ref } from "vue";
         getTicker(index) {
             var element = document.getElementsByClassName('listItem');
             var ticker = element[index].firstChild.data;
-            ticker.trim();
+            ticker = ticker.trim();
+            if(check_sectors.includes(ticker)){
+                return this.index = ticker, this.ticker = ticker;
+            }
             console.log(ticker);
             console.log(typeof ticker);
             return this.ticker = ticker;

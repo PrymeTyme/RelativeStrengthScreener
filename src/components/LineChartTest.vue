@@ -113,7 +113,7 @@ export default {
 
     watch: {
         option: async function () {
-            if (this.option == 'chart' && check_sectors.includes(this.ticker)) {
+            if (this.option == 'chart' && check_sectors.includes(this.index)) {
                 this.$nextTick(function(){
                     this.fetchData2(this.ticker,'sectors')
                     this.fetchData(default_ticker)
@@ -123,7 +123,7 @@ export default {
 
             if (this.option == 'chart' && !check_sectors.includes(this.ticker)) {
                 this.$nextTick(function(){
-                    var path = this.ticker.toLowerCase().trim()
+                    var path = this.index.toLowerCase().trim()
                     this.fetchData2(this.ticker,path)
                     this.fetchData(default_ticker)
                     this.option="";
@@ -136,7 +136,8 @@ export default {
     computed: {
 
         ...mapState(useOptionStore, ['option']), // to use this.xxx
-        ...mapState(useTickerStore, ['ticker']), // to use this.xxx
+        ...mapState(useTickerStore, ['ticker']), // to use this.
+        ...mapState(useTickerStore, ['index']), // to use this.xxx
 
     },
     setup() {

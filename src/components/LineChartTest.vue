@@ -113,7 +113,7 @@ export default {
 
     watch: {
         option: async function () {
-            if (this.option == 'chart' && check_sectors.includes(this.index)) {
+            if (this.option == 'chart' && check_sectors.includes(this.ticker)) {
                 this.$nextTick(function(){
                     this.fetchData2(this.ticker,'sectors')
                     this.fetchData(default_ticker)

@@ -1,7 +1,7 @@
 <template>
   <div class="outerLayout">
     <NavHead />
-    <div>{{ this.timeframe }}</div>
+    <div>{{ this.timeframe }}-{{this.index}}-{{this.ticker}}</div>
     <LineChart />
     <div class="vertL">
       <div v-if="items.length">

@@ -1,5 +1,6 @@
-# hello-world
+# My Beta Version of a StockScreener based on Relative Strength Comparison
 
+![](https://github.com/PrymeTyme/RelativeStrengthScreener/blob/main/src/assets/betaApp.gif)
 ## Project setup
 ```
 npm install

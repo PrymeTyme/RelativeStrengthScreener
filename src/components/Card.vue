@@ -59,11 +59,12 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .section {
     width: 50px;
     background: inherit;
     margin-bottom: 0px;
+    transition: 0.4s;
 }
 
 #toggle {

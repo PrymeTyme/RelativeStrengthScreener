@@ -292,6 +292,8 @@ export default {
     grid-column-start: 1;
 }
 
+
+
 .chartBox {
     position: relative;
     width: 700px;

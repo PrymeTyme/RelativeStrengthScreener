@@ -54,6 +54,7 @@ nav .menu-item {
     border-bottom: 5px solid transparent;
     display: flex;
     transition: 0.4s;
+
 }
 
 nav .menu-item.active,

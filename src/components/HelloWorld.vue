@@ -1,8 +1,9 @@
 <template>
   <div class="outerLayout">
     <NavHead />
-    <div style="color:#C3E0E5" >{{ this.timeframe }}-{{this.index}}-{{this.ticker}}</div>
+    <div class="infoBox" style="color:#C3E0E5" >{{ this.timeframe }}-{{this.index}}-{{this.ticker}} <button class="btn" v-if="showHoldings == true" @click="getBack()"><fa icon="angle-double-left"/> <span class="tooltip" >back to sector overview</span></button></div>
     <LineChart />
+    <div style="color:#C3E0E5">last update: xx.xx.xx</div>
     <div class="vertL">
       <div v-if="items.length">
         <div class="listHead">
@@ -63,7 +64,9 @@ export default {
       dropdownlist:[
         {title:'add to watchlist'},
         {title: 'show stocks'}
-      ]
+      ],
+      showHoldings: false,
+
     }
   },
 
@@ -120,6 +123,14 @@ export default {
       return this.colorList = colorList
     },
 
+   async getBack(){
+      this.items = await getData('sector', this.timeframe)
+      //this.timeframe = this.timeframe;
+      this.showHoldings = false;
+      
+
+    }
+
     /*     getTicker(index) {
           var element = document.getElementsByClassName('listItem');
           var ticker = element[index].firstChild.data;
@@ -152,6 +163,7 @@ export default {
       }
       else if(this.timeframe){
         this.items = await getData(this.index.toLowerCase().trim(), this.timeframe); // changes to ticker vs index ??? something logical!
+        
 
       }
     },
@@ -159,6 +171,7 @@ export default {
       if(this.option == 'show' ){
         this.items = await getData(this.index.toLowerCase().trim(),this.timeframe)
         this.option = ''
+        this.showHoldings = true
       }
 
     }
@@ -294,6 +307,43 @@ export default {
   color: #C3E0E5 !important;
   transition: 0.4s;
   
+}
+
+.infoBox{
+  display: grid;
+  grid-template-columns: 60% auto;
+  border: solid 3px #2A2E39;
+}
+
+.btn {
+  background :#131722;
+  border-radius: 5px;
+  border: none;
+  color: #C3E0E5;
+  padding: 25px 40px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btn:hover{
+  color: #E3B844;
+}
+
+.btn .tooltip{
+  visibility: hidden;
+  text-align: center;
+  color: #E3B844;
+  background-color: #2A2E39;
+  border-radius: 5px;
+  border:#131722 solid 2px;
+  position: absolute;
+  top: 368px;
+  left: 87.3%;
+  z-index: 8;
+}
+
+.btn:hover .tooltip{
+  visibility: visible;
 }
 
 

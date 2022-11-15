@@ -13,7 +13,7 @@
         </div>
         <div class="listItem" v-for="item, index in items" :key="item" @click="getTicker(index)">{{ item.ticker }}
           <div id="price"> {{ item.price }}</div>
-          <div class="change" :style="{ 'color': item.changeColor }"> {{ item.change }}</div>
+          <div class="change" :style="{ 'color': item.changeColor }"> {{ item.change }}%</div>
           <card></card>
         </div>
       </div>

@@ -20,3 +20,8 @@ def fetch_tickers(tickers,start_date,end_date):
     
     return ticker_dataframe
 
+def fetch_metadata(ticker):
+    ticker_metadata = client.get_ticker_metadata(ticker)  
+
+    return ticker_metadata  
+

@@ -26,7 +26,7 @@ def sorted_sector_to_json(timeframes,string_timeframes):
     for timeframe in timeframes:
         sector_name ="sector"
         sector_sorted = rsc_algo(sector_data,timeframe)
-        sector_df = pd.DataFrame(sector_sorted, columns=['Ticker', 'RSC', 'Price', 'Percent Change', 'Index'])
+        sector_df = pd.DataFrame(sector_sorted, columns=['Ticker', 'RSC', 'Price', 'Percent Change', 'Index']) # insert name ? here ? api call meta data ?
         sector_counter +=1 
         timeframe=string_timeframes[sector_counter]
         sector_df.to_json(fr'C:\Users\Sergej\hello-world\data\sectorSorted\{timeframe}\{sector_name}_{timeframe}.json')

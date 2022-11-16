@@ -20,8 +20,20 @@ def fetch_tickers(tickers,start_date,end_date):
     
     return ticker_dataframe
 
-def fetch_metadata(ticker):
-    ticker_metadata = client.get_ticker_metadata(ticker)  
+def fetch_metadata(tickers):
+    ticker_metadata_list = []
+    for ticker in tickers:
+        ticker_metadata = client.get_ticker_metadata(ticker) 
+        ticker_metadata_list.append(ticker_metadata) 
 
-    return ticker_metadata  
+    return ticker_metadata_list
+
+def fetch_metadata_stocks(tickers):
+    ticker_metadata_list = []
+    for list in tickers:
+        for x in list:
+            ticker_metadata = client.get_ticker_metadata(x) 
+            ticker_metadata_list.append(ticker_metadata) 
+
+    return ticker_metadata_list
 

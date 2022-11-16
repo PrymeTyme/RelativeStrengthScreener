@@ -22,6 +22,7 @@ export async function getData(ticker,timeframe) {
                 price: datapoints["Price"][k],
                 change: datapoints["Percent Change"][k],
                 index: datapoints["Index"][k],
+                name:datapoints["Name"][k],
                 changeColor: "#77D3AD"
             }
             )
@@ -31,6 +32,7 @@ export async function getData(ticker,timeframe) {
                 price: datapoints["Price"][k],
                 change: datapoints["Percent Change"][k],
                 index: datapoints["Index"][k],
+                name: datapoints["Name"][k],
                 changeColor: "#D72375"
             })
         }

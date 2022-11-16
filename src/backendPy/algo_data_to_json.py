@@ -15,7 +15,7 @@ string_timeframes = ['daily','weekly','monthly','yearly']
 
 
 
-def sorted_sector_to_json(timeframes,string_timeframes):
+def sorted_sector_to_json(timeframes,string_timeframes,names):
     sector_counter = -1   #horrible way of doing it but it works... ;) (refactor later... XD)
 
     with open(r'C:\Users\Sergej\hello-world\data\sectors\sectors.json') as f:
@@ -27,6 +27,7 @@ def sorted_sector_to_json(timeframes,string_timeframes):
         sector_name ="sector"
         sector_sorted = rsc_algo(sector_data,timeframe)
         sector_df = pd.DataFrame(sector_sorted, columns=['Ticker', 'RSC', 'Price', 'Percent Change', 'Index']) # insert name ? here ? api call meta data ?
+        sector_df['Name'] = sector_df['Ticker'].map(names)
         sector_counter +=1 
         timeframe=string_timeframes[sector_counter]
         sector_df.to_json(fr'C:\Users\Sergej\hello-world\data\sectorSorted\{timeframe}\{sector_name}_{timeframe}.json')
@@ -34,7 +35,7 @@ def sorted_sector_to_json(timeframes,string_timeframes):
 
 
 # Stock Tickers rsc algo > to dataframe > to json
-def sorted_stock_to_json(timeframes,string_timeframes):
+def sorted_stock_to_json(timeframes,string_timeframes,names):
     stock_counter = -1 
 
     for filepath in glob.glob(os.path.join(r'C:\Users\Sergej\hello-world\data\stocks','*.json')):
@@ -45,6 +46,7 @@ def sorted_stock_to_json(timeframes,string_timeframes):
             for timeframe in timeframes:
                 stock_sorted = rsc_algo(stock_data,timeframe)# if i use sector data it works with spy aswell ?
                 stock_df = pd.DataFrame(stock_sorted, columns=['Ticker', 'RSC', 'Price', 'Percent Change', 'Index'])
+                stock_df['Name'] = stock_df['Ticker'].map(names)
                 index_name = stock_df.loc[0,'Index']
                 index_name = index_name.lower()
                 stock_counter += 1

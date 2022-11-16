@@ -11,7 +11,7 @@
           <div>Price </div>
           <div>Change%</div>
         </div>
-        <div class="listItem" v-for="item, index in items" :key="item" @click="getTicker(index)">{{ item.ticker }}
+        <div class="listItem" v-for="item, index in items" :key="item" @click="getTicker(index)">{{ item.ticker }} <div class="test">{{item.name}}</div> 
           <div id="price"> {{ item.price }}</div>
           <div class="change" :style="{ 'color': item.changeColor }"> {{ item.change }}%</div>
           <card></card>
@@ -243,6 +243,7 @@ export default {
 
 .listItem {
   display: grid;
+  grid-template-rows: 60% auto;
   grid-template-columns: 30% 30% 30% auto;
   border-bottom: solid 2px #2A2E39;
   padding: 1em;
@@ -344,6 +345,16 @@ export default {
 
 .btn:hover .tooltip{
   visibility: visible;
+}
+
+.test{
+  grid-row-start: 2;
+  font-size: smaller;
+  width: 310px;
+  text-align: left;
+  margin-top: 5px;
+  
+  
 }
 
 

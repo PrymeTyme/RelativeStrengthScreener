@@ -120,7 +120,7 @@ ticker_dataframe = [xle_df,xlu_df,xlk_df,xlb_df,xlp_df,xly_df,xli_df,xlc_df,xlv_
 
 sectors_df = get_tickers(sectors,start_date,end_date)
 
-sectors_df.to_json(r'C:\Users\Sergej\hello-world\src\jsonData\sectors.json') 
+#sectors_df.to_json(r'C:\Users\Sergej\hello-world\src\jsonData\sectors.json') 
 xle_df.to_json(r'C:\Users\Sergej\hello-world\src\jsonData\xle_df.json')
 xlk_df.to_json(r'C:\Users\Sergej\hello-world\src\jsonData\xlx_df.json')
 

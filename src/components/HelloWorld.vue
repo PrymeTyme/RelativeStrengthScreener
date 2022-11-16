@@ -1,7 +1,12 @@
 <template>
   <div class="outerLayout">
     <NavHead />
-    <div class="infoBox" style="color:#C3E0E5" >{{ this.timeframe }}-{{this.index}}-{{this.ticker}} <button class="btn" v-if="showHoldings == true" @click="getBack()"><fa icon="angle-double-left"/> <span class="tooltip" >back to sector overview</span></button></div>
+    <div class="infoBox" style="color:#C3E0E5">
+      <div  :class="{'infoText':showHoldings,'infoTextBtn':!showHoldings}">{{ capitalizeFirstLetter(this.timeframe) }}-{{ this.index }}-{{ this.ticker }}</div> <button class="btn"
+        v-if="showHoldings == true" @click="getBack()">
+        <fa icon="angle-double-left" /> <span class="tooltip">back to sector overview</span>
+      </button>
+    </div>
     <LineChart />
     <div style="color:#C3E0E5">last update: xx.xx.xx</div>
     <div class="vertL">
@@ -11,7 +16,8 @@
           <div>Price </div>
           <div>Change%</div>
         </div>
-        <div class="listItem" v-for="item, index in items" :key="item" @click="getTicker(index)">{{ item.ticker }} <div class="test">{{item.name}}</div> 
+        <div class="listItem" v-for="item, index in items" :key="item" @click="getTicker(index)">{{ item.ticker }} <div
+            class="infoName">{{ item.name }}</div>
           <div id="price"> {{ item.price }}</div>
           <div class="change" :style="{ 'color': item.changeColor }"> {{ item.change }}%</div>
           <card></card>
@@ -50,7 +56,7 @@ import { storeToRefs } from 'pinia';
 //let default_timeframe = 'daily'
 //let default_ticker = 'sector'
 
-const check_sectors = ['XLE','XLU','XLK','XLB','XLP','XLY','XLI','XLC','XLV','XLF','XLRE','SPY'];
+const check_sectors = ['XLE', 'XLU', 'XLK', 'XLB', 'XLP', 'XLY', 'XLI', 'XLC', 'XLV', 'XLF', 'XLRE', 'SPY'];
 
 
 
@@ -61,9 +67,9 @@ export default {
       item: itemList,
       items: [],
       colorList: [],
-      dropdownlist:[
-        {title:'add to watchlist'},
-        {title: 'show stocks'}
+      dropdownlist: [
+        { title: 'add to watchlist' },
+        { title: 'show stocks' }
       ],
       showHoldings: false,
 
@@ -74,8 +80,8 @@ export default {
 
     ...mapState(useTimeframeStore, ['timeframe']),
     ...mapState(useOptionStore, ['option']), // to use this.xxx 
-    ...mapState(useTickerStore,['ticker']),
-    ...mapState(useTickerStore,['index']),
+    ...mapState(useTickerStore, ['ticker']),
+    ...mapState(useTickerStore, ['index']),
 
   },
 
@@ -96,7 +102,7 @@ export default {
     const { getOption } = optionStore
 
 
-    return { tickerStore, ticker, getTicker, timeframeStore, timeframe, getTimeframe,optionStore,option,getOption }
+    return { tickerStore, ticker, getTicker, timeframeStore, timeframe, getTimeframe, optionStore, option, getOption }
 
   },
 
@@ -123,12 +129,16 @@ export default {
       return this.colorList = colorList
     },
 
-   async getBack(){
+    async getBack() {
       this.items = await getData('sector', this.timeframe)
       //this.timeframe = this.timeframe;
       this.showHoldings = false;
-      
 
+
+    },
+
+    capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
     /*     getTicker(index) {
@@ -158,18 +168,18 @@ export default {
       if (this.timeframe && this.ticker == 'sector') {
         this.items = await getData(this.ticker.toLowerCase().trim(), this.timeframe); // changes to ticker vs index ???
       }
-      else if(this.timeframe && check_sectors.includes(this.ticker)){
+      else if (this.timeframe && check_sectors.includes(this.ticker)) {
         this.items = await getData('sector', this.timeframe); // changes to ticker vs index ???
       }
-      else if(this.timeframe){
+      else if (this.timeframe) {
         this.items = await getData(this.index.toLowerCase().trim(), this.timeframe); // changes to ticker vs index ??? something logical!
-        
+
 
       }
     },
-    option: async function(){
-      if(this.option == 'show' ){
-        this.items = await getData(this.index.toLowerCase().trim(),this.timeframe)
+    option: async function () {
+      if (this.option == 'show') {
+        this.items = await getData(this.index.toLowerCase().trim(), this.timeframe)
         this.option = ''
         this.showHoldings = true
       }
@@ -203,7 +213,7 @@ export default {
     LineChart,
     NavHead,
     Card,
-    
+
   },
   props: {
     msg: String,
@@ -220,7 +230,7 @@ export default {
   overflow-y: scroll;
   float: right;
   border-radius: 10px;
-  border: solid 2px #2A2E39; 
+  border: solid 2px #2A2E39;
   grid-column-start: 2;
   grid-row-start: 2;
   height: calc(100vh - 40px);
@@ -238,7 +248,7 @@ export default {
   margin: 5%;
   margin-top: 0px;
   background-color: #2A2E39;
-  
+
 }
 
 .listItem {
@@ -281,7 +291,7 @@ export default {
   position: sticky;
   top: 0;
   z-index: 5;
-  background:  #131722;
+  background: #131722;
   border-radius: 5px;
   color: #C3E0E5;
 
@@ -290,7 +300,7 @@ export default {
 .listItem>.icon {
   color: black !important;
   transition: 0.4s;
-  border-left:  2px solid #2A2E39;
+  border-left: 2px solid #2A2E39;
   background: #131722;
   justify-content: center;
   top: 0;
@@ -307,17 +317,40 @@ export default {
   background-color: #131722 !important;
   color: #C3E0E5 !important;
   transition: 0.4s;
-  
+
 }
 
-.infoBox{
+.infoBox {
   display: grid;
   grid-template-columns: 60% auto;
   border: solid 3px #2A2E39;
 }
 
+.infoText {
+  background: #131722;
+  border-radius: 5px;
+  border: none;
+  color: #C3E0E5;
+  padding: 25px 40px;
+  font-size: 16px;
+  margin-right: 6px;
+
+}
+
+.infoTextBtn{
+  background: #131722;
+  border-radius: 5px;
+  border: none;
+  color: #C3E0E5;
+  padding: 25px 40px;
+  font-size: 16px;
+  margin-right: 6px;
+  width:240px;
+
+}
+
 .btn {
-  background :#131722;
+  background: #131722;
   border-radius: 5px;
   border: none;
   color: #C3E0E5;
@@ -326,35 +359,36 @@ export default {
   cursor: pointer;
 }
 
-.btn:hover{
+.btn:hover {
   color: #E3B844;
 }
 
-.btn .tooltip{
+.btn .tooltip {
   visibility: hidden;
   text-align: center;
   color: #E3B844;
   background-color: #2A2E39;
   border-radius: 5px;
-  border:#131722 solid 2px;
+  border: #131722 solid 2px;
   position: absolute;
   top: 368px;
   left: 87.3%;
   z-index: 8;
 }
 
-.btn:hover .tooltip{
+.btn:hover .tooltip {
   visibility: visible;
 }
 
-.test{
+.infoName {
   grid-row-start: 2;
   font-size: smaller;
   width: 310px;
   text-align: left;
   margin-top: 5px;
-  
-  
+
+
+
 }
 
 

@@ -2,8 +2,8 @@
   <div class="outerLayout">
     <NavHead />
     <div class="infoBox" style="color:#C3E0E5">
-      <div  :class="{'infoText':showHoldings,'infoTextBtn':!showHoldings}">{{ capitalizeFirstLetter(this.timeframe) }}-{{ this.index }}-{{ this.ticker }}</div> <button class="btn"
-        v-if="showHoldings == true" @click="getBack()">
+      <div  :class="{'infoText':showHoldings,'infoTextBtn':!showHoldings}">Timeframe:{{ capitalizeFirstLetter(this.timeframe) }}<br>Sector:{{ this.index }}<br>Ticker:{{ this.ticker }}</div> <button class="btn"
+        v-if="showHoldings == true" @click="getBack()"> <!--make the info box a vue component -->
         <fa icon="angle-double-left" /> <span class="tooltip">back to sector overview</span>
       </button>
     </div>
@@ -331,9 +331,10 @@ export default {
   border-radius: 5px;
   border: none;
   color: #C3E0E5;
-  padding: 25px 40px;
+  padding: 15px 40px;
   font-size: 16px;
   margin-right: 6px;
+  text-align: left;
 
 }
 
@@ -342,10 +343,11 @@ export default {
   border-radius: 5px;
   border: none;
   color: #C3E0E5;
-  padding: 25px 40px;
+  padding: 15px 40px;
   font-size: 16px;
   margin-right: 6px;
   width:240px;
+  text-align: left;
 
 }
 

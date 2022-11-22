@@ -47,7 +47,7 @@ nav {
 }
 
 nav .menu-item {
-    color: #FFF;
+    color: #C3E0E5;
     padding: 25px 40px;
     position: relative;
     text-align: center;

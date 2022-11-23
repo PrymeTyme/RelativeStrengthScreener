@@ -7,8 +7,9 @@
         <fa icon="angle-double-left" /> <span class="tooltip">back to sector overview</span>
       </button>
     </div>
+    <Carousel  />
     <LineChart />
-    <div style="color:#C3E0E5">last update: xx.xx.xx</div>
+    <div style="color:#C3E0E5 ;grid-row-start:4">last update: xx.xx.xx</div>
     <div class="vertL">
       <div v-if="items.length">
         <div class="listHead">
@@ -34,6 +35,7 @@ import LineChart from "./LineChartTest.vue";
 import itemList from "./Item.vue";
 
 import Card from "./Card.vue"
+import Carousel from "./Carousel.vue";
 
 import { getData } from "../getData.js";
 import { useTickerStore } from "../stores/tickers.js"
@@ -213,6 +215,7 @@ export default {
     LineChart,
     NavHead,
     Card,
+    Carousel,
 
   },
   props: {
@@ -233,13 +236,14 @@ export default {
   border: solid 2px #2A2E39;
   grid-column-start: 2;
   grid-row-start: 2;
-  height: calc(100vh - 40px);
+  height: calc(100vh - 150px);
+  margin-top: 1px;
 
 }
 
 .outerLayout {
   display: grid;
-  grid-template-rows: 10% auto;
+  grid-template-rows: 10% 100px auto 5%;
   grid-template-columns: 80% auto;
   overflow: auto;
   border: 5px solid #2A2E39;
@@ -248,7 +252,6 @@ export default {
   margin: 5%;
   margin-top: 0px;
   background-color: #2A2E39;
-
 }
 
 .listItem {
@@ -391,6 +394,19 @@ export default {
 
 
 
+}
+.carousel1{
+  grid-row-start: 2;
+  grid-column-start: 1;
+  border: solid 3px #2A2E39;
+  padding: 1em;
+  cursor: pointer;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: #131722;
+  border-radius: 10px;
+  color: #C3E0E5;
 }
 
 

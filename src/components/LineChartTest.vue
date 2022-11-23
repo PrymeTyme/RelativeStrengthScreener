@@ -2,7 +2,6 @@
     <div class="chartCard">
         <div class="chartBox">
             <div>
-                
             </div>
             <canvas id="myChart"></canvas>
         </div>
@@ -281,15 +280,17 @@ export default {
 
 .chartCard {
     width: 70vw;
-    height: calc(100vh - 40px);
+    height: calc(100vh - 300px);
     background:  #131722;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 10px;
     border: solid 3px #2A2E39;
-    grid-row-start: 2;
+    grid-row-start: 3;
     grid-column-start: 1;
+    margin-top: 88px;
+    
 }
 
 

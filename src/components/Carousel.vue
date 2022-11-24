@@ -6,7 +6,19 @@
         <div class="carousel">
             <div class="inner" ref="inner" :style="innerStyles">
                 <div class="card" v-for="card in cards" :key="card">
-                    {{ card.ticker }}
+                    <div class="card-content">
+                        <div class="card-head">{{ card.index }} </div>
+                        
+                            <div class="strong"> Strong: {{ card.strongest }}<div 
+                                    v-bind:style="[card.change >= 0 ? { 'color': '#77D3AD' } : { 'color': '#D72375' }]">
+                                {{card.change}}%</div>
+                            </div>
+                            <div class="weak"> Weak: {{ card.weakest }}<div 
+                                    v-bind:style="[card.weakestChange >= 0 ? { 'color': '#77D3AD' } : { 'color': '#D72375' }]">
+                                {{ card.weakestChange }}%</div>
+                            </div>
+                        
+                    </div>
                 </div>
             </div>
         </div>
@@ -18,18 +30,17 @@
 </template>
   
 <script>
-import { getData } from "../getData.js";
-//import { useTickerStore } from "../stores/tickers.js"
-//import { useTimeframeStore } from "../stores/timeframes.js";
-//import { mapState } from 'pinia'
-//import { storeToRefs } from 'pinia';
+import { getCarouselData } from "../getCarouselData.js"
+import { useTimeframeStore } from "../stores/timeframes.js";
+import { mapState } from 'pinia'
+import { storeToRefs } from 'pinia';
 
 
 export default {
     name: 'CarouselHead',
     data() {
         return {
-            cards: [0,0,0,0,0,0,0,0,0],
+            cards: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             innerStyles: {},
             step: '',
             transitioning: false
@@ -39,6 +50,18 @@ export default {
     mounted() {
         this.setStep()
         this.resetTranslate()
+    },
+
+    computed: {
+        ...mapState(useTimeframeStore, ['timeframe']),
+    },
+
+    setup() {
+        const timeframeStore = useTimeframeStore();
+        const { timeframe } = storeToRefs(timeframeStore)
+        const { getTimeframe } = timeframeStore
+
+        return { timeframeStore, timeframe, getTimeframe }
     },
     methods: {
 
@@ -97,17 +120,23 @@ export default {
                 transform: `translateX(-${this.step})`
             }
         },
-        
+
     },
 
     async created() {
-    getData('sector', 'daily').then(response => {
-      console.log(response);
-      this.cards = response
-    })
+        getCarouselData('daily').then(response => {
+            this.cards = response
+        })
 
-  },
+    },
+    watch: {
+        timeframe: async function () {
+            if (this.timeframe) {
+                this.cards = await getCarouselData(this.timeframe);
 
+            }
+        }
+    }
 }
 </script>
   
@@ -118,6 +147,7 @@ export default {
     display: grid;
     grid-template-columns: 5% auto 5%;
     width: 830px;
+
 }
 
 .carousel {
@@ -130,13 +160,14 @@ export default {
     overflow: hidden;
     height: 150px;
     width: 64vw;
-    
+
 
 }
 
 .inner {
     transition: transform 0.2s;
     white-space: nowrap;
+
 }
 
 .card {
@@ -150,8 +181,44 @@ export default {
     align-items: center;
     justify-content: center;
 
-    
+
+
+
 }
+
+.card-content {
+    display: grid;
+    grid-template-rows: 30% 30% auto;
+}
+
+.card-head {
+    margin-top: -15px;
+    grid-row-start: 1;
+
+
+}
+
+
+.strong {
+    grid-row-start: 2;
+    display: flex;
+    margin-top: 50px;
+
+   
+
+
+}
+
+.weak {
+    grid-row-start: 3;
+    display: flex;
+    margin-top: 5px;
+
+    
+
+}
+
+
 
 
 .btn1 {
@@ -177,5 +244,13 @@ export default {
     cursor: pointer;
 
 
+}
+
+.btn1:hover {
+    color: #E3B844;
+}
+
+.btn2:hover {
+    color: #E3B844;
 }
 </style>

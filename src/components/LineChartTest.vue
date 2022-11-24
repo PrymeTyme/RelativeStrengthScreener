@@ -2,11 +2,23 @@
     <div class="chartCard">
         <div class="chartBox">
             <div>
+                <button class="buttons" @click="setDateRange1(14,350)">14days</button>
+                <button class="buttons" @click="setDateRange1(30,350)">1month</button>
+                <button class="buttons" @click="setDateRange1(60,350)">2months</button>
+                <button class="buttons" @click="setDateRange1(90,350)">3months</button>
+                <button class="buttons" @click="setDateRange1(180,350)">6months</button>
+                <button class="buttons" @click="setDateRange1(0,350)">1year</button>
             </div>
             <canvas id="myChart"></canvas>
         </div>
         <div class="chartBox">
             <div>
+                <button class="buttons" @click="setDateRange(14,350)">14days</button>
+                <button class="buttons" @click="setDateRange(30,350)">1month</button>
+                <button class="buttons" @click="setDateRange(60,350)">2months</button>
+                <button class="buttons" @click="setDateRange(90,350)">3months</button>
+                <button class="buttons" @click="setDateRange(180,350)">6months</button>
+                <button class="buttons" @click="setDateRange(0,350)">1year</button>
                <!-- <button class="buttons" @click="fetchData2(ticker)">fetch2</button> -->
             </div>
             <canvas id="myChart2"></canvas>
@@ -55,17 +67,12 @@ const check_sectors = ['XLE','XLU','XLK','XLB','XLP','XLY','XLI','XLC','XLV','XL
 export default {
 
     name: "LineChart",
-    data() {
-        return {
-
-        }
-    },
     mounted() {
         this.updateStockPriceHistoryChart();
         this.updateStockPriceHistoryChart2();
     },
     methods: {
-        async fetchData(ticker,path) {
+        async fetchData(ticker,path,start,end) {
             const url = `http://localhost:3000/raw_${path}`;
             const response = await fetch(url);
             const datapoints = await response.json();
@@ -80,6 +87,7 @@ export default {
             stockDate = stockDate.reverse();
             stockDate = stockDate.map(x => new Date(x*1));
             stockDate = stockDate.map(x => x.toLocaleDateString());
+            stockDate = stockDate.splice(start,end);
             stockPrice = Object.values(datapoints[ticker]);
             stockPrice = stockPrice.reverse();
             myChart.config.data.datasets[0].data = stockPrice;
@@ -89,7 +97,7 @@ export default {
             return datapoints;
         },
 
-        async fetchData2(ticker,path) {
+        async fetchData2(ticker,path,start,end) {
             const url = `http://localhost:3000/raw_${path}`;
             const response = await fetch(url);
             const datapoints = await response.json();
@@ -104,6 +112,7 @@ export default {
             stockDate2 = stockDate2.reverse();
             stockDate2 = stockDate2.map(x => new Date(x*1));
             stockDate2 = stockDate2.map(x => x.toLocaleDateString());
+            stockDate2 = stockDate2.splice(start,end);
             stockPrice2 = Object.values(datapoints[ticker]);
             stockPrice2 = stockPrice2.reverse();
             myChart2.config.data.datasets[0].data = stockPrice2;
@@ -113,6 +122,21 @@ export default {
             return datapoints;
         },
 
+        async setDateRange1(start,end){
+            var path = this.index.toLowerCase().trim()
+            if(check_sectors.includes(this.ticker)){
+                await this.fetchData(default_ticker,'sectors',start,end)
+            }
+            else{
+                await this.fetchData(this.index,path,start,end)
+            }
+    
+        },
+
+        async setDateRange(start,end){
+            var path = this.index.toLowerCase().trim()
+            await this.fetchData2(this.ticker,path,start,end)
+        },
     }, // if async created i need to put in arguments/parameters aswell..!!
 
 
@@ -120,8 +144,8 @@ export default {
         option: async function () {
             if (this.option == 'chart' && check_sectors.includes(this.ticker)) {
                 this.$nextTick(function(){
-                    this.fetchData2(this.ticker,'sectors')
-                    this.fetchData(default_ticker,'sectors')
+                    this.fetchData2(this.ticker,'sectors',0,350)
+                    this.fetchData(default_ticker,'sectors',0,350)
                     this.option="";
                 })
             }
@@ -129,8 +153,8 @@ export default {
             if (this.option == 'chart' && !check_sectors.includes(this.ticker)) {
                 this.$nextTick(function(){
                     var path = this.index.toLowerCase().trim()
-                    this.fetchData2(this.ticker,path)
-                    this.fetchData(this.index,'sectors')
+                    this.fetchData2(this.ticker,path,0,350)
+                    this.fetchData(this.index,'sectors',0,350)
                     this.option="";
                 })
             }
@@ -306,26 +330,28 @@ export default {
 
 .buttons {
     padding: 10px 15px;
-    font-size: 18px;
+    font-size: 15px;
     cursor: pointer;
     text-align: center;
     text-decoration: none;
     outline: none;
-    color:  #131722d0;
-    background-color:  #1317224b;
-    border: solid 2px  #131722;
+    color:  #C3E0E5;
+    background-color:  #131722;
+    border: solid 2px  #2A2E39;
     border-radius: 10px;
+    margin-bottom: 88px;
 }
 
 .buttons:hover {
     background-color:  #131722;
-    color: #C3E0E5;
+    color: #E3B844;
 }
 
 .buttons:active {
-    color: #2A2E39d0;
-    background-color: #2A2E394b;
+    color: #C3E0E5;
+    background-color: #131722;
     transform: translateY(4px);
+    
 }
 
 @media only screen and (max-width:1900px) {

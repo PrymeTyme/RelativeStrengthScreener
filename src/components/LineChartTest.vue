@@ -78,7 +78,7 @@ export default {
             console.log(datapoints[ticker])
             stockDate = Object.keys(datapoints[ticker]);
             stockDate = stockDate.reverse();
-            stockDate = stockDate.map(x => new Date(x * 1000));
+            stockDate = stockDate.map(x => new Date(x*1));
             stockDate = stockDate.map(x => x.toLocaleDateString());
             stockPrice = Object.values(datapoints[ticker]);
             stockPrice = stockPrice.reverse();
@@ -102,7 +102,7 @@ export default {
             console.log(datapoints[ticker])
             stockDate2 = Object.keys(datapoints[ticker]);
             stockDate2 = stockDate2.reverse();
-            stockDate2 = stockDate2.map(x => new Date(x * 1000));
+            stockDate2 = stockDate2.map(x => new Date(x*1));
             stockDate2 = stockDate2.map(x => x.toLocaleDateString());
             stockPrice2 = Object.values(datapoints[ticker]);
             stockPrice2 = stockPrice2.reverse();

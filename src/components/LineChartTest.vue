@@ -2,22 +2,22 @@
     <div class="chartCard">
         <div class="chartBox">
             <div>
-                <button class="buttons" @click="setDateRange1(14,350)">14days</button>
-                <button class="buttons" @click="setDateRange1(30,350)">1month</button>
-                <button class="buttons" @click="setDateRange1(60,350)">2months</button>
-                <button class="buttons" @click="setDateRange1(90,350)">3months</button>
-                <button class="buttons" @click="setDateRange1(180,350)">6months</button>
+                <button class="buttons" @click="setDateRange1(236,350)">14days</button>
+                <button class="buttons" @click="setDateRange1(220,350)">1month</button>
+                <button class="buttons" @click="setDateRange1(190,350)">2months</button>
+                <button class="buttons" @click="setDateRange1(160,350)">3months</button>
+                <button class="buttons" @click="setDateRange1(70,350)">6months</button>
                 <button class="buttons" @click="setDateRange1(0,350)">1year</button>
             </div>
             <canvas id="myChart"></canvas>
         </div>
         <div class="chartBox">
             <div>
-                <button class="buttons" @click="setDateRange(14,350)">14days</button>
-                <button class="buttons" @click="setDateRange(30,350)">1month</button>
-                <button class="buttons" @click="setDateRange(60,350)">2months</button>
-                <button class="buttons" @click="setDateRange(90,350)">3months</button>
-                <button class="buttons" @click="setDateRange(180,350)">6months</button>
+                <button class="buttons" @click="setDateRange(236,350)">14days</button>
+                <button class="buttons" @click="setDateRange(220,350)">1month</button>
+                <button class="buttons" @click="setDateRange(190,350)">2months</button>
+                <button class="buttons" @click="setDateRange(160,350)">3months</button>
+                <button class="buttons" @click="setDateRange(70,350)">6months</button>
                 <button class="buttons" @click="setDateRange(0,350)">1year</button>
                <!-- <button class="buttons" @click="fetchData2(ticker)">fetch2</button> -->
             </div>
@@ -87,7 +87,7 @@ export default {
             stockDate = stockDate.reverse();
             stockDate = stockDate.map(x => new Date(x*1));
             stockDate = stockDate.map(x => x.toLocaleDateString());
-            stockDate = stockDate.splice(start,end);
+            stockDate = stockDate.slice(start,end);
             stockPrice = Object.values(datapoints[ticker]);
             stockPrice = stockPrice.reverse();
             myChart.config.data.datasets[0].data = stockPrice;
@@ -112,7 +112,7 @@ export default {
             stockDate2 = stockDate2.reverse();
             stockDate2 = stockDate2.map(x => new Date(x*1));
             stockDate2 = stockDate2.map(x => x.toLocaleDateString());
-            stockDate2 = stockDate2.splice(start,end);
+            stockDate2 = stockDate2.slice(start,end);
             stockPrice2 = Object.values(datapoints[ticker]);
             stockPrice2 = stockPrice2.reverse();
             myChart2.config.data.datasets[0].data = stockPrice2;

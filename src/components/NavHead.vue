@@ -51,7 +51,7 @@ nav .menu-item {
     padding: 25px 40px;
     position: relative;
     text-align: center;
-    border-bottom: 5px solid transparent;
+    border-bottom: 3px solid transparent;
     display: flex;
     transition: 0.4s;
 

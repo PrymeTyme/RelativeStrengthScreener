@@ -2,11 +2,8 @@
 
     <div class="section">
         <div class="title" v-on:click="toggle">
-            <svg class="svg" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                <path fill-rule="evenodd"
-                    d="M2 12.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
-            </svg>
-
+            <fa icon="angle-down"  class="arrow-down" v-show="!showSection"/>
+            <fa icon="angle-down" flip="vertical" class="arrow-down" v-show="showSection"/>
         </div>
 
         <div class="body" v-show="showSection">
@@ -75,12 +72,12 @@ export default {
     left: 50%;
     transform: translateX(-100%);
     width: 320px;
-    border-top: 2px solid #2A2E39;
+    border-top: 2px solid #2A2E39 transparent;
     margin-left: 120%;
 }
 
 .body:hover {
-    border-top: 2px solid #131722;
+    border-top: 2px solid #131722 transparent;
 }
 
 .option {
@@ -106,7 +103,8 @@ export default {
     color: #E3B844;
 }
 
-.svg:hover{
+
+.arrow-down:hover{
     color: #E3B844;
 }
 

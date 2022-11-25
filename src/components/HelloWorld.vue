@@ -392,22 +392,8 @@ export default {
   text-align: left;
   margin-top: 5px;
 
-
-
 }
-.carousel1{
-  grid-row-start: 2;
-  grid-column-start: 1;
-  border: solid 3px #2A2E39;
-  padding: 1em;
-  cursor: pointer;
-  position: sticky;
-  top: 0;
-  z-index: 5;
-  background: #131722;
-  border-radius: 10px;
-  color: #C3E0E5;
-}
+
 
 
 

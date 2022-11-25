@@ -2,6 +2,7 @@
     <div class="chartCard">
         <div class="chartBox">
             <div>
+                <button class="buttons" @click="setDateRange1(243,350)">1week</button>
                 <button class="buttons" @click="setDateRange1(236,350)">14days</button>
                 <button class="buttons" @click="setDateRange1(220,350)">1month</button>
                 <button class="buttons" @click="setDateRange1(190,350)">2months</button>
@@ -13,6 +14,7 @@
         </div>
         <div class="chartBox">
             <div>
+                <button class="buttons" @click="setDateRange(243,350)">1week</button>
                 <button class="buttons" @click="setDateRange(236,350)">14days</button>
                 <button class="buttons" @click="setDateRange(220,350)">1month</button>
                 <button class="buttons" @click="setDateRange(190,350)">2months</button>
@@ -90,6 +92,7 @@ export default {
             stockDate = stockDate.slice(start,end);
             stockPrice = Object.values(datapoints[ticker]);
             stockPrice = stockPrice.reverse();
+            stockPrice = stockPrice.slice(start,end);
             myChart.config.data.datasets[0].data = stockPrice;
             myChart.config.data.labels = stockDate;
             myChart.config.data.datasets[0].label = tickerLabel1;
@@ -115,6 +118,7 @@ export default {
             stockDate2 = stockDate2.slice(start,end);
             stockPrice2 = Object.values(datapoints[ticker]);
             stockPrice2 = stockPrice2.reverse();
+            stockPrice2 = stockPrice2.slice(start,end);
             myChart2.config.data.datasets[0].data = stockPrice2;
             myChart2.config.data.labels = stockDate2;
             myChart2.config.data.datasets[0].label = tickerLabel;

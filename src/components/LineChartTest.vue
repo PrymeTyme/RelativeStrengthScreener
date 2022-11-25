@@ -352,11 +352,12 @@ export default {
 }
 
 .buttons:active {
-    color: #C3E0E5;
+    color: #E3B844;
     background-color: #131722;
     transform: translateY(4px);
     
 }
+
 
 @media only screen and (max-width:1900px) {
     .chartBox {

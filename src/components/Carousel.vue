@@ -153,7 +153,6 @@ export default {
 .carousel {
     border: solid 3px #2A2E39;
     padding: 1em;
-    cursor: pointer;
     background: #2A2E39;
     border-radius: 10px;
     color: #C3E0E5;
@@ -180,11 +179,10 @@ export default {
     border-radius: 10px;
     align-items: center;
     justify-content: center;
-
-
-
+    cursor: pointer;
 
 }
+
 
 .card-content {
     display: grid;

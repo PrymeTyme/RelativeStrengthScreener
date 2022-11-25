@@ -280,8 +280,7 @@ export default {
 
 .listItem:active {
   color: #C3E0E5;
-  background-color: #131722;
-  transform: translateY(4px);
+  
 }
 
 

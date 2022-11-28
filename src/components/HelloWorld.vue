@@ -296,6 +296,7 @@ export default {
   background: #131722;
   border-radius: 5px;
   color: #C3E0E5;
+  font-weight: 700;
 
 }
 
@@ -337,6 +338,7 @@ export default {
   font-size: 16px;
   margin-right: 6px;
   text-align: left;
+  
 
 }
 

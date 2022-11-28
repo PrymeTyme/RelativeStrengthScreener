@@ -358,6 +358,7 @@ export default {
     border: solid 2px  #2A2E39;
     border-radius: 10px;
     margin-bottom: 88px;
+    font-weight: 500;
 }
 
 .buttons:hover {

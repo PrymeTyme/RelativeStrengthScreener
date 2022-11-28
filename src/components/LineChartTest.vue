@@ -73,8 +73,8 @@ export default {
 
     data(){
         return{
-            isActive: undefined,
-            isActive2: undefined
+            isActive:undefined,
+            isActive2:undefined,
         }
     },
 
@@ -164,6 +164,8 @@ export default {
                     this.fetchData2(this.ticker,'sectors',0,350)
                     this.fetchData(default_ticker,'sectors',0,350)
                     this.option="";
+                    this.isActive=7;
+                    this.isActive2=7;
                 })
             }
 
@@ -173,6 +175,8 @@ export default {
                     this.fetchData2(this.ticker,path,0,350)
                     this.fetchData(this.index,'sectors',0,350)
                     this.option="";
+                    this.isActive=7;
+                    this.isActive2=7;
                 })
             }
             

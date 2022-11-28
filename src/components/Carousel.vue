@@ -9,11 +9,11 @@
                     <div class="card-content">
                         <div class="card-head">{{ card.index }} </div>
                         
-                            <div class="strong"> Strong: {{ card.strongest }}<div 
+                            <div class="strong"> Strong: {{ card.strongest }}&nbsp;<div 
                                     v-bind:style="[card.change >= 0 ? { 'color': '#77D3AD' } : { 'color': '#D72375' }]">
                                 {{card.change}}%</div>
                             </div>
-                            <div class="weak"> Weak: {{ card.weakest }}<div 
+                            <div class="weak"> Weak: {{ card.weakest }}&nbsp;<div 
                                     v-bind:style="[card.weakestChange >= 0 ? { 'color': '#77D3AD' } : { 'color': '#D72375' }]">
                                 {{ card.weakestChange }}%</div>
                             </div>
@@ -180,6 +180,9 @@ export default {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    font-size: clamp(8px,1.9vw,15px);
+    font-weight: 600;
+    
 
 }
 
@@ -202,8 +205,6 @@ export default {
     display: flex;
     margin-top: 50px;
 
-   
-
 
 }
 
@@ -212,11 +213,7 @@ export default {
     display: flex;
     margin-top: 5px;
 
-    
-
 }
-
-
 
 
 .btn1 {

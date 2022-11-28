@@ -2,25 +2,25 @@
     <div class="chartCard">
         <div class="chartBox">
             <div>
-                <button class="buttons" @click="setDateRange1(243,350)">1week</button>
-                <button class="buttons" @click="setDateRange1(236,350)">14days</button>
-                <button class="buttons" @click="setDateRange1(220,350)">1month</button>
-                <button class="buttons" @click="setDateRange1(190,350)">2months</button>
-                <button class="buttons" @click="setDateRange1(160,350)">3months</button>
-                <button class="buttons" @click="setDateRange1(70,350)">6months</button>
-                <button class="buttons" @click="setDateRange1(0,350)">1year</button>
+                <button class="buttons" :class="{active:isActive==1}" @click="setDateRange1(243,350);isActive=1">1week</button>
+                <button class="buttons" :class="{active:isActive==2}" @click="setDateRange1(236,350);isActive=2">14days</button>
+                <button class="buttons" :class="{active:isActive==3}" @click="setDateRange1(220,350);isActive=3">1month</button>
+                <button class="buttons" :class="{active:isActive==4}" @click="setDateRange1(190,350);isActive=4">2months</button>
+                <button class="buttons" :class="{active:isActive==5}" @click="setDateRange1(160,350);isActive=5">3months</button>
+                <button class="buttons" :class="{active:isActive==6}" @click="setDateRange1(70,350);isActive=6">6months</button>
+                <button class="buttons" :class="{active:isActive==7}" @click="setDateRange1(0,350);isActive=7">1year</button>
             </div>
             <canvas id="myChart"></canvas>
         </div>
         <div class="chartBox">
             <div>
-                <button class="buttons" @click="setDateRange(243,350)">1week</button>
-                <button class="buttons" @click="setDateRange(236,350)">14days</button>
-                <button class="buttons" @click="setDateRange(220,350)">1month</button>
-                <button class="buttons" @click="setDateRange(190,350)">2months</button>
-                <button class="buttons" @click="setDateRange(160,350)">3months</button>
-                <button class="buttons" @click="setDateRange(70,350)">6months</button>
-                <button class="buttons" @click="setDateRange(0,350)">1year</button>
+                <button class="buttons" :class="{active:isActive2==1}" @click="setDateRange(243,350);isActive2=1">1week</button>
+                <button class="buttons" :class="{active:isActive2==2}" @click="setDateRange(236,350);isActive2=2">14days</button>
+                <button class="buttons" :class="{active:isActive2==3}" @click="setDateRange(220,350);isActive2=3">1month</button>
+                <button class="buttons" :class="{active:isActive2==4}" @click="setDateRange(190,350);isActive2=4">2months</button>
+                <button class="buttons" :class="{active:isActive2==5}" @click="setDateRange(160,350);isActive2=5">3months</button>
+                <button class="buttons" :class="{active:isActive2==6}" @click="setDateRange(70,350);isActive2=6">6months</button>
+                <button class="buttons" :class="{active:isActive2==7}" @click="setDateRange(0,350);isActive2=7">1year</button>
                <!-- <button class="buttons" @click="fetchData2(ticker)">fetch2</button> -->
             </div>
             <canvas id="myChart2"></canvas>
@@ -39,6 +39,7 @@ import { storeToRefs } from 'pinia'
 import { mapState } from 'pinia'
 import { useOptionStore } from "../stores/options.js"
 import { getChart } from "../getChart.js"
+
 
 
 //import { ref } from "vue"
@@ -69,6 +70,14 @@ const check_sectors = ['XLE','XLU','XLK','XLB','XLP','XLY','XLI','XLC','XLV','XL
 export default {
 
     name: "LineChart",
+
+    data(){
+        return{
+            isActive: undefined,
+            isActive2: undefined
+        }
+    },
+
     mounted() {
         this.updateStockPriceHistoryChart();
         this.updateStockPriceHistoryChart2();
@@ -130,9 +139,11 @@ export default {
             var path = this.index.toLowerCase().trim()
             if(check_sectors.includes(this.ticker)){
                 await this.fetchData(default_ticker,'sectors',start,end)
+                 
             }
             else{
-                await this.fetchData(this.index,path,start,end)
+                await this.fetchData(this.index,path,start,end)  
+                
             }
     
         },
@@ -140,7 +151,9 @@ export default {
         async setDateRange(start,end){
             var path = this.index.toLowerCase().trim()
             await this.fetchData2(this.ticker,path,start,end)
+        
         },
+
     }, // if async created i need to put in arguments/parameters aswell..!!
 
 
@@ -171,6 +184,7 @@ export default {
         ...mapState(useOptionStore, ['option']), // to use this.xxx
         ...mapState(useTickerStore, ['ticker']), // to use this.
         ...mapState(useTickerStore, ['index']), // to use this.xxx
+
 
     },
     setup() {
@@ -356,6 +370,10 @@ export default {
     background-color: #131722;
     transform: translateY(4px);
     
+}
+
+.buttons.active{
+    color: #E3B844;
 }
 
 

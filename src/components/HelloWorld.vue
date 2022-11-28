@@ -236,7 +236,7 @@ export default {
   border: solid 2px #2A2E39;
   grid-column-start: 2;
   grid-row-start: 2;
-  height: calc(100vh - 150px);
+  height: calc(100vh - 112px);
   margin-top: 1px;
 
 }

@@ -1,6 +1,10 @@
 <template>
     <div class="chartCard">
-        <div class="chartBox">
+        <fa @click="toggle" class="toggle" icon="chevron-right" v-show="!showWatchlist"/>
+        <fa @click="toggle" class="toggle" icon="chevron-right" v-show="showWatchlist" flip="horizontal"/>
+         <div :class="{'slide-in':showWatchlist,'slide-out':!showWatchlist}" v-if="showWatchlist"> <WatchList/> </div>
+         <div :class="{'slide-in':showWatchlist,'slide-out':!showWatchlist}" v-else> <WatchList/> </div>
+        <div :class="{'chartBox':!showWatchlist,'chartBoxToggle':showWatchlist}">
             <div>
                 <button class="buttons" :class="{active:isActive==1}" @click="setDateRange1(243,350);isActive=1">1week</button>
                 <button class="buttons" :class="{active:isActive==2}" @click="setDateRange1(236,350);isActive=2">14days</button>
@@ -10,9 +14,9 @@
                 <button class="buttons" :class="{active:isActive==6}" @click="setDateRange1(70,350);isActive=6">6months</button>
                 <button class="buttons" :class="{active:isActive==7}" @click="setDateRange1(0,350);isActive=7">1year</button>
             </div>
-            <canvas id="myChart"></canvas>
+            <canvas id="myChart"></canvas> 
         </div>
-        <div class="chartBox">
+        <div :class="{'chartBox':!showWatchlist,'chartBoxToggle':showWatchlist}">
             <div>
                 <button class="buttons" :class="{active:isActive2==1}" @click="setDateRange(243,350);isActive2=1">1week</button>
                 <button class="buttons" :class="{active:isActive2==2}" @click="setDateRange(236,350);isActive2=2">14days</button>
@@ -21,7 +25,6 @@
                 <button class="buttons" :class="{active:isActive2==5}" @click="setDateRange(160,350);isActive2=5">3months</button>
                 <button class="buttons" :class="{active:isActive2==6}" @click="setDateRange(70,350);isActive2=6">6months</button>
                 <button class="buttons" :class="{active:isActive2==7}" @click="setDateRange(0,350);isActive2=7">1year</button>
-               <!-- <button class="buttons" @click="fetchData2(ticker)">fetch2</button> -->
             </div>
             <canvas id="myChart2"></canvas>
         </div>
@@ -33,12 +36,14 @@
    
   
 <script>
+import WatchList from "./Watchlist.vue";
 import Chart from "chart.js/auto";
 import { useTickerStore } from "../stores/tickers.js"
 import { storeToRefs } from 'pinia'
 import { mapState } from 'pinia'
 import { useOptionStore } from "../stores/options.js"
 import { getChart } from "../getChart.js"
+
 
 
 
@@ -75,14 +80,22 @@ export default {
         return{
             isActive:undefined,
             isActive2:undefined,
+            showWatchlist:false,
         }
     },
+
+    components:{WatchList},
 
     mounted() {
         this.updateStockPriceHistoryChart();
         this.updateStockPriceHistoryChart2();
+        
     },
     methods: {
+
+         toggle(){
+            this.showWatchlist = !this.showWatchlist
+        },
         async fetchData(ticker,path,start,end) {
             const url = `http://localhost:3000/raw_${path}`;
             const response = await fetch(url);
@@ -330,7 +343,7 @@ export default {
     background:  #131722;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     border-radius: 10px;
     border: solid 3px #2A2E39;
     grid-row-start: 3;
@@ -348,6 +361,33 @@ export default {
     border-radius: 20px;
     border: solid 5px #131722;
     background: #2A2E39;
+
+}
+
+.chartBoxToggle{
+    position: relative;
+    width: 470px;
+    padding: 20px;
+    border-radius: 20px;
+    border: solid 5px #131722;
+    background: #2A2E39;
+
+}
+
+.chartBoxToggle.buttons{
+    padding: 10px 5px;
+    font-size: 15px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color:  #C3E0E5;
+    background-color:  #131722;
+    border: solid 2px  #2A2E39;
+    border-radius: 10px;
+    margin-bottom: 88px;
+    font-weight: 500;
+
 }
 
 .buttons {
@@ -380,6 +420,106 @@ export default {
 .buttons.active{
     color: #E3B844;
 }
+
+.toggle{
+    width: 50px;
+    font-size: 50px;
+}
+
+.toggle:hover{
+    color: #E3B844;
+}
+
+.toggle .tooltip {
+  visibility: hidden;
+  text-align: center;
+  color: #E3B844;
+  background-color: #2A2E39;
+  border-radius: 5px;
+  border: #131722 solid 2px;
+  position: absolute;
+  top: 368px;
+  left: 87.3%;
+  z-index: 8;
+}
+
+.toggle:hover .tooltip {
+  visibility: visible;
+}
+
+.slide-in{
+ -webkit-animation: slideIn 0.5s forwards;
+ -moz-animation: slideIn 0.5s forwards;
+ animation: slideIn 0.5s forwards;
+
+}
+
+.slide-out{
+-webkit-animation: slideOut 0.5s forwards;
+ -moz-animation: slideOut 0.5s forwards;
+ animation: slideOut 0.5s forwards;
+ margin-right: -250px;
+
+}
+
+@-webkit-keyframes slideIn {
+  0% {
+    transform: translateX(-200px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@-moz-keyframes slideIn {
+  0% {
+    transform: translateX(-200px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes slideIn {
+  0% {
+    transform: translateX(-200px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@-webkit-keyframes slideOut {
+  100% {
+    transform: translateX(-300px);
+  }
+  0% {
+    transform: translateX(0);
+  }
+}
+@-moz-keyframes slideOut {
+  100% {
+    transform: translateX(-300px);
+  }
+  0% {
+    transform: translateX(0);
+  }
+}
+@keyframes slideOut {
+  100% {
+    transform: translateX(-300px);
+  }
+  0% {
+    transform: translateX(0);
+  }
+}
+
+
+
+
+
+
+
+
+
 
 
 @media only screen and (max-width:1900px) {

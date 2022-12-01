@@ -390,6 +390,7 @@ export default {
     border-radius: 10px;
     margin-bottom: 88px;
     font-weight: 500;
+    transition: 0.9s;
 }
 
 .chartBoxToggle .buttons{

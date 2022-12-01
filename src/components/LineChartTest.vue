@@ -398,10 +398,12 @@ export default {
 
 }
 
-.buttons:hover {
+.buttons:hover{
     background-color:  #131722;
     color: #E3B844;
+    transition: 0s;
 }
+
 
 .buttons:active {
     color: #E3B844;

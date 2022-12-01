@@ -1,9 +1,10 @@
 import { defineStore } from 'pinia'
+import {useStorage} from '@vueuse/core'
 
 export const useWatchListStore = defineStore('watchList', {
 
   state:()=>({
-    watchList:[],
+    watchList: useStorage('watchList',[]),
     id:0,
   }),
 

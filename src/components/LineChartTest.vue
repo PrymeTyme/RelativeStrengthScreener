@@ -361,6 +361,7 @@ export default {
     border-radius: 20px;
     border: solid 5px #131722;
     background: #2A2E39;
+    transition: 0.9s;
 
 }
 
@@ -371,24 +372,10 @@ export default {
     border-radius: 20px;
     border: solid 5px #131722;
     background: #2A2E39;
+    transition: 0.9s;
 
 }
 
-.chartBoxToggle.buttons{
-    padding: 10px 5px;
-    font-size: 15px;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    outline: none;
-    color:  #C3E0E5;
-    background-color:  #131722;
-    border: solid 2px  #2A2E39;
-    border-radius: 10px;
-    margin-bottom: 88px;
-    font-weight: 500;
-
-}
 
 .buttons {
     padding: 10px 15px;
@@ -403,6 +390,11 @@ export default {
     border-radius: 10px;
     margin-bottom: 88px;
     font-weight: 500;
+}
+
+.chartBoxToggle .buttons{
+    padding: 10px 5px;
+
 }
 
 .buttons:hover {

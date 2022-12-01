@@ -56,4 +56,6 @@ import WatchlistItem from './WatchlistItem.vue';
     margin-left: -10px;
   }
 
+
+
   </style>

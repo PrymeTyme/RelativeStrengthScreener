@@ -2,7 +2,7 @@
     <div v-for="item in watchList" :key="item.id">
         <div class="items">
             <div>{{ item.ticker }}</div>
-            <div class="deleteItem" title="Delete Ticker" > <fa  @click="deleteItem(item.id)" icon="subtract"> </fa> </div> 
+            <div class="deleteItem" title="Delete" > <fa  @click="deleteItem(item.id)" icon="subtract"> </fa> </div> 
         </div>
     </div>
 </template>
@@ -52,14 +52,15 @@ export default {
   -webkit-justify-content: center;
   justify-content: center;
   background: #131722;
-  border-radius: 8px;
+  border-radius: 5px;
   color: #E3B844;
   content: attr(title);
-  margin: -20px 75px 0px;
+  margin: -20px 70px 0px;
   font-size: 12px;
   padding: 13px;
   width: 50px;
   font-weight: lighter;
+  margin-bottom: -5%;
 }
 
 

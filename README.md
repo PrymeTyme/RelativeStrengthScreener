@@ -1,6 +1,10 @@
 # My Beta Version of a StockScreener based on Relative Strength Comparison
 
 ![](https://github.com/PrymeTyme/RelativeStrengthScreener/blob/main/src/assets/betaApp4.gif)
+
+# Wathlist Alpha function in action
+![](https://github.com/PrymeTyme/RelativeStrengthScreener/blob/main/src/assets/watchlist.gif)
+
 ## Project setup
 ```
 npm install

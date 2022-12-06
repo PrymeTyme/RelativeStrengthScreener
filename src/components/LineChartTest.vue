@@ -6,25 +6,25 @@
          <div :class="{'slide-in':showWatchlist,'slide-out':!showWatchlist}" v-else> <WatchList/> </div>
         <div :class="{'chartBox':!showWatchlist,'chartBoxToggle':showWatchlist}">
             <div>
-                <button class="buttons" :class="{active:isActive==1}" @click="setDateRange1(243,350);isActive=1">1week</button>
-                <button class="buttons" :class="{active:isActive==2}" @click="setDateRange1(236,350);isActive=2">14days</button>
-                <button class="buttons" :class="{active:isActive==3}" @click="setDateRange1(220,350);isActive=3">1month</button>
-                <button class="buttons" :class="{active:isActive==4}" @click="setDateRange1(190,350);isActive=4">2months</button>
-                <button class="buttons" :class="{active:isActive==5}" @click="setDateRange1(160,350);isActive=5">3months</button>
-                <button class="buttons" :class="{active:isActive==6}" @click="setDateRange1(70,350);isActive=6">6months</button>
-                <button class="buttons" :class="{active:isActive==7}" @click="setDateRange1(0,350);isActive=7">1year</button>
+                <button class="buttons" :class="{active:isActive==1}" @click="setDateRangeLeft(243,350);isActive=1">1week</button>
+                <button class="buttons" :class="{active:isActive==2}" @click="setDateRangeLeft(236,350);isActive=2">14days</button>
+                <button class="buttons" :class="{active:isActive==3}" @click="setDateRangeLeft(220,350);isActive=3">1month</button>
+                <button class="buttons" :class="{active:isActive==4}" @click="setDateRangeLeft(190,350);isActive=4">2months</button>
+                <button class="buttons" :class="{active:isActive==5}" @click="setDateRangeLeft(160,350);isActive=5">3months</button>
+                <button class="buttons" :class="{active:isActive==6}" @click="setDateRangeLeft(70,350);isActive=6">6months</button>
+                <button class="buttons" :class="{active:isActive==7}" @click="setDateRangeLeft(0,350);isActive=7">1year</button>
             </div>
             <canvas id="myChart"></canvas> 
         </div>
         <div :class="{'chartBox':!showWatchlist,'chartBoxToggle':showWatchlist}">
             <div>
-                <button class="buttons" :class="{active:isActive2==1}" @click="setDateRange(243,350);isActive2=1">1week</button>
-                <button class="buttons" :class="{active:isActive2==2}" @click="setDateRange(236,350);isActive2=2">14days</button>
-                <button class="buttons" :class="{active:isActive2==3}" @click="setDateRange(220,350);isActive2=3">1month</button>
-                <button class="buttons" :class="{active:isActive2==4}" @click="setDateRange(190,350);isActive2=4">2months</button>
-                <button class="buttons" :class="{active:isActive2==5}" @click="setDateRange(160,350);isActive2=5">3months</button>
-                <button class="buttons" :class="{active:isActive2==6}" @click="setDateRange(70,350);isActive2=6">6months</button>
-                <button class="buttons" :class="{active:isActive2==7}" @click="setDateRange(0,350);isActive2=7">1year</button>
+                <button class="buttons" :class="{active:isActive2==1}" @click="setDateRangeRight(243,350);isActive2=1">1week</button>
+                <button class="buttons" :class="{active:isActive2==2}" @click="setDateRangeRight(236,350);isActive2=2">14days</button>
+                <button class="buttons" :class="{active:isActive2==3}" @click="setDateRangeRight(220,350);isActive2=3">1month</button>
+                <button class="buttons" :class="{active:isActive2==4}" @click="setDateRangeRight(190,350);isActive2=4">2months</button>
+                <button class="buttons" :class="{active:isActive2==5}" @click="setDateRangeRight(160,350);isActive2=5">3months</button>
+                <button class="buttons" :class="{active:isActive2==6}" @click="setDateRangeRight(70,350);isActive2=6">6months</button>
+                <button class="buttons" :class="{active:isActive2==7}" @click="setDateRangeRight(0,350);isActive2=7">1year</button>
             </div>
             <canvas id="myChart2"></canvas>
         </div>
@@ -148,7 +148,7 @@ export default {
             return datapoints;
         },
 
-        async setDateRange1(start,end){
+        async setDateRangeLeft(start,end){
             var path = this.index.toLowerCase().trim()
             if(check_sectors.includes(this.ticker)){
                 await this.fetchData(default_ticker,'sectors',start,end)
@@ -161,7 +161,7 @@ export default {
     
         },
 
-        async setDateRange(start,end){
+        async setDateRangeRight(start,end){
             var path = this.index.toLowerCase().trim()
             await this.fetchData2(this.ticker,path,start,end)
         

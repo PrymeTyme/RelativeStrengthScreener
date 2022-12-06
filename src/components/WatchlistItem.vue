@@ -2,7 +2,7 @@
     <div v-for="item in watchList" :key="item.id">
         <div class="items">
             <div>{{ item.ticker }}</div>
-            <div class="deleteItem" title="Delete" > <fa  @click="deleteItem(item.id)" icon="subtract"> </fa> </div> 
+            <div class="deleteItem" title="Delete" > <fa  @click="deleteItem(item.id)" icon="trash-can"> </fa> </div> 
         </div>
     </div>
 </template>
@@ -42,11 +42,11 @@ export default {
 }
 
 .deleteItem{
-    font-weight:900;
-    font-size: larger;
+    font-weight:500;
+    font-size: 16px;
 }
 
-.deleteItem:hover:after{
+/*.deleteItem:hover:after{
   display: -webkit-flex;
   display: flex;
   -webkit-justify-content: center;
@@ -61,7 +61,7 @@ export default {
   width: 50px;
   font-weight: lighter;
   margin-bottom: -5%;
-}
+}*/
 
 
 .deleteItem:hover{

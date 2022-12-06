@@ -74,7 +74,6 @@ export default {
         { title: 'show stocks' }
       ],
       showHoldings: false,
-
     }
   },
 
@@ -185,6 +184,7 @@ export default {
         this.option = ''
         this.showHoldings = true
       }
+
 
     }
   },
@@ -394,6 +394,9 @@ export default {
   margin-top: 5px;
 
 }
+
+
+
 
 
 

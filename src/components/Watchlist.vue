@@ -1,5 +1,5 @@
 <template>
-    <div class="watchlistBox">My Watchlist
+    <div class="watchlistBox"> My Watchlist
       <div class="watchlistHead">
           <div>Ticker </div>
           <div>Price </div>
@@ -55,6 +55,8 @@ import WatchlistItem from './WatchlistItem.vue';
     width: 100px;
     margin-left: -10px;
   }
+
+  
 
 
 

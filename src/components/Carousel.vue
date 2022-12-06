@@ -1,14 +1,13 @@
 <template>
     <div class="carousel-container">
-        <button class="btn1" @click="next">
+        <button class="btn1" @click="prev">
             <fa icon="angle-left" />
         </button>
         <div class="carousel">
             <div class="inner" ref="inner" :style="innerStyles">
                 <div class="card" v-for="card in cards" :key="card">
                     <div class="card-content">
-                        <div class="card-head">{{ card.index }} </div>
-                        
+                        <div class="card-head">{{ card.index }} </div> 
                             <div class="strong"> Strong: {{ card.strongest }}&nbsp;<div 
                                     v-bind:style="[card.change >= 0 ? { 'color': '#77D3AD' } : { 'color': '#D72375' }]">
                                 {{card.change}}%</div>
@@ -16,13 +15,12 @@
                             <div class="weak"> Weak: {{ card.weakest }}&nbsp;<div 
                                     v-bind:style="[card.weakestChange >= 0 ? { 'color': '#77D3AD' } : { 'color': '#D72375' }]">
                                 {{ card.weakestChange }}%</div>
-                            </div>
-                        
+                            </div>     
                     </div>
                 </div>
             </div>
         </div>
-        <button class="btn2" @click="prev">
+        <button class="btn2" @click="next">
             <fa icon="angle-right" />
         </button>
     </div>

@@ -19,7 +19,7 @@
         </div>
         <div class="listItem" v-for="item, index in items" :key="item" @click="getTicker(index)">{{ item.ticker }} <div
             class="infoName">{{ item.name }}</div>
-          <div id="price"> {{ item.price }}</div>
+          <div id="price" @click="getPriceTest(index)"> {{ item.price }}</div>
           <div class="change" :style="{ 'color': item.changeColor }"> {{ item.change }}%</div>
           <card></card>
         </div>
@@ -37,6 +37,8 @@ import itemList from "./Item.vue";
 import Card from "./Card.vue"
 import Carousel from "./Carousel.vue";
 
+import {getPriceTest} from "../getPriceTest.js"
+//import { getPrice } from "../getPrice.js";
 import { getData } from "../getData.js";
 import { useTickerStore } from "../stores/tickers.js"
 import { useTimeframeStore } from "../stores/timeframes.js";
@@ -103,7 +105,7 @@ export default {
     const { getOption } = optionStore
 
 
-    return { tickerStore, ticker, getTicker, timeframeStore, timeframe, getTimeframe, optionStore, option, getOption }
+    return { tickerStore, ticker, getTicker, timeframeStore, timeframe, getTimeframe, optionStore, option, getOption,getPriceTest }
 
   },
 
@@ -220,6 +222,7 @@ export default {
   },
   props: {
     msg: String,
+    
   },
 
 

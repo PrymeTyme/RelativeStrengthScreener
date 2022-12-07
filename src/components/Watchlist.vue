@@ -1,5 +1,6 @@
 <template>
-    <div class="watchlistBox"> My Watchlist
+    <div class="watchlistBox">
+      <div class="head" >My Watchlist</div>  
       <div class="watchlistHead">
           <div>Ticker </div>
           <div>Price </div>
@@ -21,6 +22,8 @@ import WatchlistItem from './WatchlistItem.vue';
   <style scoped>
 
   .watchlistBox{
+    display: grid;
+    grid-template-rows: 10% 10% auto;
     position: relative;
     width: 200px;
     padding: 20px;
@@ -54,6 +57,18 @@ import WatchlistItem from './WatchlistItem.vue';
   .chng{
     width: 100px;
     margin-left: -10px;
+  }
+
+  .head{
+    position: sticky;
+    top:-5%;
+    z-index: 5;
+    background: #2A2E39;
+    border-radius: 5px;
+    color: #C3E0E5;
+    font-weight: 700;
+    font-size: 16px;
+
   }
 
   

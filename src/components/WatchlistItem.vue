@@ -1,7 +1,7 @@
 <template>
     <div v-for="item in watchList" :key="item.id">
         <div class="items">
-            <div>{{ item.ticker }}</div>
+            <div>{{ item.ticker }} {{item.price}}</div>
             <div class="deleteItem" title="Delete" > <fa  @click="deleteItem(item.id)" icon="trash-can"> </fa> </div> 
         </div>
     </div>

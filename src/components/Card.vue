@@ -1,8 +1,8 @@
 <template id="card">
 
-<div v-if="addWatchlist" class="toast-container">
-      <p class="toast" > {{this.ticker}} added to watchlist</p>
-  </div>
+    <div v-if="addWatchlist" class="toast-container">
+        <p class="toast"> {{ this.ticker }} added to watchlist</p>
+    </div>
 
     <div class="section">
         <div class="title" v-on:click="toggle">
@@ -31,8 +31,12 @@ import { useOptionStore } from '../stores/options.js'
 import { useWatchListStore } from '../stores/watchlist'
 import { useTickerStore } from '../stores/tickers'
 
+import { getPriceTest } from '../getPriceTest.js'
+
 import { mapState } from 'pinia'
 import { storeToRefs } from 'pinia'
+
+let price = null
 
 
 export default {
@@ -42,6 +46,7 @@ export default {
         toggle() {
             this.showSection = !this.showSection
         },
+
 
     },
     computed: {
@@ -62,18 +67,29 @@ export default {
     watch: {
         option: function () {
             if (this.option == 'add') {
+                let container = [...Array.from(document.getElementsByClassName('listItem'))]
+
+                container.forEach((item, index) => {
+                    item.addEventListener('click', () => price = getPriceTest(index))
+                })
+
+                console.log(price+"initial")
+
+                //var test = document.getElementsByClassName('listItem')
+
+                
+                this.watchlistStore.addToList(this.ticker, price)
                 this.addWatchlist = !this.addWatchlist
-                this.watchlistStore.addToList(this.ticker)
                 this.option = ''
-                
-                
+
+
             }
 
         },
 
-        addWatchlist(){
-            if(this.addWatchlist)
-            setTimeout(()=> this.addWatchlist = false,2500)
+        addWatchlist() {
+            if (this.addWatchlist)
+                setTimeout(() => this.addWatchlist = false, 2500)
         }
 
     },
@@ -152,39 +168,43 @@ export default {
 }
 
 
-.toast-container{
-  position: fixed;
-  top: 1rem;
-  right: 1.5rem;
-  display: grid;
-  justify-items: end;
-  gap: 1.5rem;
-  z-index: 10;
+.toast-container {
+    position: fixed;
+    top: 1rem;
+    right: 1.5rem;
+    display: grid;
+    justify-items: end;
+    gap: 1.5rem;
+    z-index: 10;
 
 }
 
-.toast{
-  border-radius: 10px;
-  font-size: 1.5rem;
-  font-weight: bold;
-  line-height: 1;
-  padding: 0.5em 1em;
-  background-color: #E3B844;
-  color: #0D2A38;
-  animation: toastIt 3000ms cubic-bezier(0.785, 0.135, 0.15, 0.86) forwards;
- 
+.toast {
+    border-radius: 10px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 1;
+    padding: 0.5em 1em;
+    background-color: #E3B844;
+    color: #0D2A38;
+    animation: toastIt 3000ms cubic-bezier(0.785, 0.135, 0.15, 0.86) forwards;
+
 }
 
-@keyframes toastIt{
-  0%,100%{
-    transform:  translateY(-150%);
-    opacity:0;
-  }
-  10%,90%{
-    transform:  translateY(0%);
-    opacity:1;
+@keyframes toastIt {
 
-  }
+    0%,
+    100% {
+        transform: translateY(-150%);
+        opacity: 0;
+    }
+
+    10%,
+    90% {
+        transform: translateY(0%);
+        opacity: 1;
+
+    }
 }
 </style>
   

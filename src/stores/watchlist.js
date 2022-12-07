@@ -10,8 +10,8 @@ export const useWatchListStore = defineStore('watchList', {
 
   actions:{
 
-    addToList(ticker){
-        this.watchList.push({ticker, id:this.id++})
+    addToList(ticker,price){
+        this.watchList.push({ticker,price:price, id:this.id++})
     },
 
     deleteItem(tickerID) {

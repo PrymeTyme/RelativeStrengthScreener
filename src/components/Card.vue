@@ -67,17 +67,12 @@ export default {
     watch: {
         option: function () {
             if (this.option == 'add') {
-                let container = [...Array.from(document.getElementsByClassName('listItem'))]
 
-                container.forEach((item, index) => {
-                    item.addEventListener('click', () => price = getPriceTest(index))
-                })
-
-                console.log(price+"initial")
+                //console.log(price+"initial")
 
                 //var test = document.getElementsByClassName('listItem')
 
-                
+
                 this.watchlistStore.addToList(this.ticker, price)
                 this.addWatchlist = !this.addWatchlist
                 this.option = ''
@@ -90,7 +85,18 @@ export default {
         addWatchlist() {
             if (this.addWatchlist)
                 setTimeout(() => this.addWatchlist = false, 2500)
+        },
+
+        showSection: function () {
+            let container = [...Array.from(document.getElementsByClassName('listItem'))]
+
+            container.forEach((item, index) => {
+                item.addEventListener('click', () => price = getPriceTest(index))
+            })
+
+
         }
+
 
     },
 
